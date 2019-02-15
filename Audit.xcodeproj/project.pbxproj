@@ -10,7 +10,35 @@
 		BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17934B2217524B0075FCA2 /* AppDelegate.swift */; };
 		BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17934D2217524C0075FCA2 /* Assets.xcassets */; };
 		BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17934F2217524C0075FCA2 /* MainMenu.xib */; };
+		BE179362221753F40075FCA2 /* AuditLib.h in Headers */ = {isa = PBXBuildFile; fileRef = BE179360221753F40075FCA2 /* AuditLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE179365221753F40075FCA2 /* AuditLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE17935E221753F40075FCA2 /* AuditLib.framework */; };
+		BE179366221753F40075FCA2 /* AuditLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE17935E221753F40075FCA2 /* AuditLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE17936C221754170075FCA2 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17936B221754170075FCA2 /* Property.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE179363221753F40075FCA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE1793402217524B0075FCA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE17935D221753F40075FCA2;
+			remoteInfo = AuditLib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE17936A221753F40075FCA2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE179366221753F40075FCA2 /* AuditLib.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BE1793482217524B0075FCA2 /* Audit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -18,10 +46,22 @@
 		BE17934D2217524C0075FCA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1793502217524C0075FCA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BE1793522217524C0075FCA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE17935E221753F40075FCA2 /* AuditLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AuditLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE179360221753F40075FCA2 /* AuditLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuditLib.h; sourceTree = "<group>"; };
+		BE179361221753F40075FCA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE17936B221754170075FCA2 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BE1793452217524B0075FCA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE179365221753F40075FCA2 /* AuditLib.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE17935B221753F40075FCA2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				BE17934A2217524B0075FCA2 /* Audit */,
+				BE17935F221753F40075FCA2 /* AuditLib */,
 				BE1793492217524B0075FCA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1793482217524B0075FCA2 /* Audit.app */,
+				BE17935E221753F40075FCA2 /* AuditLib.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,7 +100,28 @@
 			path = Audit;
 			sourceTree = "<group>";
 		};
+		BE17935F221753F40075FCA2 /* AuditLib */ = {
+			isa = PBXGroup;
+			children = (
+				BE179360221753F40075FCA2 /* AuditLib.h */,
+				BE179361221753F40075FCA2 /* Info.plist */,
+				BE17936B221754170075FCA2 /* Property.swift */,
+			);
+			path = AuditLib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BE179359221753F40075FCA2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE179362221753F40075FCA2 /* AuditLib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		BE1793472217524B0075FCA2 /* Audit */ = {
@@ -68,15 +131,35 @@
 				BE1793442217524B0075FCA2 /* Sources */,
 				BE1793452217524B0075FCA2 /* Frameworks */,
 				BE1793462217524B0075FCA2 /* Resources */,
+				BE17936A221753F40075FCA2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BE179364221753F40075FCA2 /* PBXTargetDependency */,
 			);
 			name = Audit;
 			productName = Audit;
 			productReference = BE1793482217524B0075FCA2 /* Audit.app */;
 			productType = "com.apple.product-type.application";
+		};
+		BE17935D221753F40075FCA2 /* AuditLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE179367221753F40075FCA2 /* Build configuration list for PBXNativeTarget "AuditLib" */;
+			buildPhases = (
+				BE179359221753F40075FCA2 /* Headers */,
+				BE17935A221753F40075FCA2 /* Sources */,
+				BE17935B221753F40075FCA2 /* Frameworks */,
+				BE17935C221753F40075FCA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AuditLib;
+			productName = AuditLib;
+			productReference = BE17935E221753F40075FCA2 /* AuditLib.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -90,6 +173,10 @@
 				TargetAttributes = {
 					BE1793472217524B0075FCA2 = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					BE17935D221753F40075FCA2 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -107,6 +194,7 @@
 			projectRoot = "";
 			targets = (
 				BE1793472217524B0075FCA2 /* Audit */,
+				BE17935D221753F40075FCA2 /* AuditLib */,
 			);
 		};
 /* End PBXProject section */
@@ -121,6 +209,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE17935C221753F40075FCA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -132,7 +227,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE17935A221753F40075FCA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE17936C221754170075FCA2 /* Property.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE179364221753F40075FCA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE17935D221753F40075FCA2 /* AuditLib */;
+			targetProxy = BE179363221753F40075FCA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BE17934F2217524C0075FCA2 /* MainMenu.xib */ = {
@@ -264,6 +375,7 @@
 		BE1793572217524C0075FCA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Audit/Info.plist;
@@ -280,6 +392,7 @@
 		BE1793582217524C0075FCA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Audit/Info.plist;
@@ -290,6 +403,65 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.Audit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		BE179368221753F40075FCA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = AuditLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.AuditLib;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BE179369221753F40075FCA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = AuditLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.AuditLib;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -310,6 +482,15 @@
 			buildConfigurations = (
 				BE1793572217524C0075FCA2 /* Debug */,
 				BE1793582217524C0075FCA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE179367221753F40075FCA2 /* Build configuration list for PBXNativeTarget "AuditLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE179368221753F40075FCA2 /* Debug */,
+				BE179369221753F40075FCA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

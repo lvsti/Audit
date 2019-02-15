@@ -186,35 +186,29 @@ public extension Property {
         return status == kAudioHardwareNoError
     }
     
-    public func translateValue<T, U>(_ value: T,
-                                     scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
-                                     element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                                     in objectID: AudioObjectID) -> U? {
+    public func translateValue<T>(_ value: T,
+                                  scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                                  element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
+                                  in objectID: AudioObjectID) -> T? {
         guard case .translation = readSemantics else {
             return nil
         }
         
         var address = AudioObjectPropertyAddress(selector, scope, element)
-        var value = value
-        var translatedValue = UnsafeMutablePointer<U>.allocate(capacity: 1)
-        defer { translatedValue.deallocate() }
-        
-        var translation = AudioValueTranslation(mInputData: &value,
-                                                mInputDataSize: UInt32(MemoryLayout<T>.size),
-                                                mOutputData: translatedValue,
-                                                mOutputDataSize: UInt32(MemoryLayout<U>.size))
-        
-        var dataSize = UInt32(MemoryLayout<AudioValueTranslation>.size)
-        
+        var dataSize = UInt32(MemoryLayout<T>.size)
+        var data = UnsafeMutableRawPointer.allocate(byteCount: Int(dataSize), alignment: MemoryLayout<T>.alignment)
+        defer { data.deallocate() }
+        data.assumingMemoryBound(to: T.self).pointee = value
+
         let status = AudioObjectGetPropertyData(objectID, &address,
                                                 0, nil,
-                                                &dataSize,
-                                                &translation)
+                                                &dataSize, &data)
         guard status == kAudioHardwareNoError else {
             return nil
         }
         
-        return translatedValue.pointee
+        let typedData = data.bindMemory(to: T.self, capacity: 1)
+        return typedData.pointee
     }
 
     public func addListener(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,

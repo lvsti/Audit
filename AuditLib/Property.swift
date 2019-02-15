@@ -36,17 +36,13 @@ public enum PropertyReadSemantics {
 }
 
 public enum PropertyType {
-//    case boolean, boolean32, int32, uint32, uint64, float32, float64, fourCC,
-//        classID, objectID, deviceID,
-//        audioValueRange, propertyAddress, streamConfiguration, streamDeck,
-//        pid,
-//        smpteCallback, scheduledOutputCallback,
-//        componentDescription, time, cgRect
-//    case arrayOfDeviceIDs, arrayOfObjectIDs, arrayOfClassIDs, arrayOfStreamIDs,
-//        arrayOfUInt32s, arrayOfFloat64s, arrayOfAudioValueRanges
-//    case string, formatDescription, sampleBuffer, clock
-//    case arrayOfFormatDescriptions
-//    case audioValueTranslation
+    case boolean32, uint32, float32, float64, fourCC,
+        classID, objectID,
+        audioChannelLayout, audioStreamBasicDescription, audioValueRange,
+        pid
+    case arrayOfObjectIDs, arrayOfStreamIDs, arrayOfClassIDs, arrayOfAudioValueRanges,
+        arrayOfUInt32s, arrayOfAudioStreamRangedDescriptions
+    case string, url, dictionary
 }
 
 public enum AudioObjectProperty {

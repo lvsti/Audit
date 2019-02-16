@@ -26,7 +26,8 @@ final class BrowserWindowController: NSWindowController {
     private var splitViewController = NSSplitViewController(nibName: nil, bundle: nil)
     private var objectTreeViewController = ObjectTreeViewController()
     private var propertyListViewController = PropertyListViewController()
-    
+    private var adjustControlPanelController: AdjustControlPanelController!
+
     init() {
         super.init(window: nil)
         objectTreeViewController.delegate = self
@@ -58,7 +59,15 @@ final class BrowserWindowController: NSWindowController {
             return
         }
         
-//        (NSApp.delegate as! AppDelegate).showAdjustControlPanel(for: node.objectID)
+        guard adjustControlPanelController == nil else {
+            return
+        }
+        
+        adjustControlPanelController = AdjustControlPanelController(controlID: node.objectID)
+        adjustControlPanelController.delegate = self
+        window?.beginSheet(adjustControlPanelController.window!) { _ in
+            self.adjustControlPanelController = nil
+        }
     }
     
     @IBAction private func scopeSelectorChanged(_ sender: Any) {
@@ -130,5 +139,11 @@ extension BrowserWindowController: ObjectTreeViewDelegate {
 
         propertyListViewController.currentScope = currentScope
         propertyListViewController.currentNode = currentNode
+    }
+}
+
+extension BrowserWindowController: AdjustControlPanelControllerDelegate {
+    func adjustControlPanelDidDismiss() {
+        window?.endSheet(adjustControlPanelController.window!)
     }
 }

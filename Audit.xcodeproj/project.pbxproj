@@ -36,6 +36,8 @@
 		BE17939D221828110075FCA2 /* BrowserWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17939C221828110075FCA2 /* BrowserWindow.xib */; };
 		BE1793A12218326E0075FCA2 /* TranslationPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */; };
 		BE1793A22218326E0075FCA2 /* TranslationPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1793A02218326E0075FCA2 /* TranslationPanel.xib */; };
+		BE1793A6221836150075FCA2 /* AdjustControlPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1793A4221836150075FCA2 /* AdjustControlPanelController.swift */; };
+		BE1793A7221836150075FCA2 /* AdjustControlPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1793A5221836150075FCA2 /* AdjustControlPanel.xib */; };
 		BE1793A92218AD170075FCA2 /* AudioChannelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1793A82218AD170075FCA2 /* AudioChannelLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		BE17939C221828110075FCA2 /* BrowserWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrowserWindow.xib; sourceTree = "<group>"; };
 		BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationPanelController.swift; sourceTree = "<group>"; };
 		BE1793A02218326E0075FCA2 /* TranslationPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TranslationPanel.xib; sourceTree = "<group>"; };
+		BE1793A4221836150075FCA2 /* AdjustControlPanelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustControlPanelController.swift; sourceTree = "<group>"; };
+		BE1793A5221836150075FCA2 /* AdjustControlPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdjustControlPanel.xib; sourceTree = "<group>"; };
 		BE1793A82218AD170075FCA2 /* AudioChannelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChannelLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +142,7 @@
 		BE17934A2217524B0075FCA2 /* Audit */ = {
 			isa = PBXGroup;
 			children = (
+				BE1793A3221836150075FCA2 /* AdjustControl */,
 				BE179397221827C50075FCA2 /* BrowserWindow */,
 				BE179392221823BB0075FCA2 /* LookupWindow */,
 				BE179389221821B70075FCA2 /* ObjectTree */,
@@ -225,6 +230,15 @@
 				BE1793A02218326E0075FCA2 /* TranslationPanel.xib */,
 			);
 			path = TranslationPanel;
+			sourceTree = "<group>";
+		};
+		BE1793A3221836150075FCA2 /* AdjustControl */ = {
+			isa = PBXGroup;
+			children = (
+				BE1793A4221836150075FCA2 /* AdjustControlPanelController.swift */,
+				BE1793A5221836150075FCA2 /* AdjustControlPanel.xib */,
+			);
+			path = AdjustControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE17938222181F410075FCA2 /* PropertyListView.xib in Resources */,
+				BE1793A7221836150075FCA2 /* AdjustControlPanel.xib in Resources */,
 				BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */,
 				BE1793A22218326E0075FCA2 /* TranslationPanel.xib in Resources */,
 				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
@@ -347,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1793A6221836150075FCA2 /* AdjustControlPanelController.swift in Sources */,
 				BE17937322176E580075FCA2 /* AudioControl.swift in Sources */,
 				BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */,
 				BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */,

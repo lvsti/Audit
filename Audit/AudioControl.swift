@@ -70,9 +70,10 @@ enum AudioError: Error {
 
 enum Control {
     static func model(for controlID: AudioObjectID) -> ControlModel? {
+        let cfName: CFString = ObjectProperty.name.value(in: controlID) ?? "(untitled)" as CFString
+
         guard
-            let classID: AudioClassID = ObjectProperty.class.value(in: controlID),
-            let cfName: CFString = ObjectProperty.name.value(in: controlID)
+            let classID: AudioClassID = ObjectProperty.class.value(in: controlID)
         else {
             return nil
         }
@@ -98,8 +99,8 @@ enum Control {
                 let scalarValue: Float = LevelControlProperty.scalarValue.value(in: controlID),
                 let dbValue: Float = LevelControlProperty.decibelValue.value(in: controlID),
                 let dbRange: AudioValueRange = LevelControlProperty.decibelRange.value(in: controlID)
-                else {
-                    return nil
+            else {
+                return nil
             }
             
             return .level(LevelControlModel(controlID: controlID,

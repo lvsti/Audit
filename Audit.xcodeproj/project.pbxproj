@@ -19,6 +19,9 @@
 		BE17937322176E580075FCA2 /* AudioControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937122176E580075FCA2 /* AudioControl.swift */; };
 		BE1793772218182E0075FCA2 /* fourcc.json in Resources */ = {isa = PBXBuildFile; fileRef = BE1793752218182E0075FCA2 /* fourcc.json */; };
 		BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1793762218182E0075FCA2 /* FourCCDatabase.swift */; };
+		BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17937922181E710075FCA2 /* LookupWindow.xib */; };
+		BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937A22181E710075FCA2 /* LookupWindow.swift */; };
+		BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937B22181E710075FCA2 /* LookupWindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		BE17937122176E580075FCA2 /* AudioControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioControl.swift; sourceTree = "<group>"; };
 		BE1793752218182E0075FCA2 /* fourcc.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourcc.json; sourceTree = "<group>"; };
 		BE1793762218182E0075FCA2 /* FourCCDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourCCDatabase.swift; sourceTree = "<group>"; };
+		BE17937922181E710075FCA2 /* LookupWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LookupWindow.xib; sourceTree = "<group>"; };
+		BE17937A22181E710075FCA2 /* LookupWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindow.swift; sourceTree = "<group>"; };
+		BE17937B22181E710075FCA2 /* LookupWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,13 +108,16 @@
 		BE17934A2217524B0075FCA2 /* Audit */ = {
 			isa = PBXGroup;
 			children = (
+				BE17934B2217524B0075FCA2 /* AppDelegate.swift */,
+				BE17934D2217524C0075FCA2 /* Assets.xcassets */,
 				BE17937122176E580075FCA2 /* AudioControl.swift */,
 				BE1793752218182E0075FCA2 /* fourcc.json */,
 				BE1793762218182E0075FCA2 /* FourCCDatabase.swift */,
-				BE17934B2217524B0075FCA2 /* AppDelegate.swift */,
-				BE17934D2217524C0075FCA2 /* Assets.xcassets */,
-				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
 				BE1793522217524C0075FCA2 /* Info.plist */,
+				BE17937A22181E710075FCA2 /* LookupWindow.swift */,
+				BE17937922181E710075FCA2 /* LookupWindow.xib */,
+				BE17937B22181E710075FCA2 /* LookupWindowController.swift */,
+				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
 			);
 			path = Audit;
 			sourceTree = "<group>";
@@ -222,6 +231,7 @@
 				BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */,
 				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
 				BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */,
+				BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +250,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE17937322176E580075FCA2 /* AudioControl.swift in Sources */,
+				BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */,
+				BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */,
 				BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */,
 				BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */,
 			);

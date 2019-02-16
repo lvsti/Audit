@@ -22,6 +22,8 @@
 		BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17937922181E710075FCA2 /* LookupWindow.xib */; };
 		BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937A22181E710075FCA2 /* LookupWindow.swift */; };
 		BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937B22181E710075FCA2 /* LookupWindowController.swift */; };
+		BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17938D221823320075FCA2 /* QuickLookViewController.swift */; };
+		BE179390221823320075FCA2 /* QuickLookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17938E221823320075FCA2 /* QuickLookView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		BE17937922181E710075FCA2 /* LookupWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LookupWindow.xib; sourceTree = "<group>"; };
 		BE17937A22181E710075FCA2 /* LookupWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindow.swift; sourceTree = "<group>"; };
 		BE17937B22181E710075FCA2 /* LookupWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindowController.swift; sourceTree = "<group>"; };
+		BE17938D221823320075FCA2 /* QuickLookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookViewController.swift; sourceTree = "<group>"; };
+		BE17938E221823320075FCA2 /* QuickLookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickLookView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 				BE17937922181E710075FCA2 /* LookupWindow.xib */,
 				BE17937B22181E710075FCA2 /* LookupWindowController.swift */,
 				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
+				BE17938C221823320075FCA2 /* QuickLook */,
 			);
 			path = Audit;
 			sourceTree = "<group>";
@@ -132,6 +137,15 @@
 				BE17936F22175FBF0075FCA2 /* Properties.swift */,
 			);
 			path = AuditLib;
+			sourceTree = "<group>";
+		};
+		BE17938C221823320075FCA2 /* QuickLook */ = {
+			isa = PBXGroup;
+			children = (
+				BE17938D221823320075FCA2 /* QuickLookViewController.swift */,
+				BE17938E221823320075FCA2 /* QuickLookView.xib */,
+			);
+			path = QuickLook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +246,7 @@
 				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
 				BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */,
 				BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */,
+				BE179390221823320075FCA2 /* QuickLookView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE17937322176E580075FCA2 /* AudioControl.swift in Sources */,
+				BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */,
 				BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */,
 				BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */,
 				BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */,

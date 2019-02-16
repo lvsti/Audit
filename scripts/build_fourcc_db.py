@@ -5,14 +5,14 @@ import re
 import json
 
 fourcc_regex = re.compile("((?:kCMIO|kCMPixelFormat|kCMVideoCodecType|kAudio)[^\s]+?)\s*=\s*'(....)',?", re.S)
+fourcc_constant_blacklist_regex = re.compile("FolderType$", re.S)
 
 def generate_source(source_path):
 	outfile = open(source_path, "w")
 	outfile.write("""
-		#include <CoreMedia/CMFormatDescription.h>
-		#include <CoreMediaIO/CMIOHardware.h>
-		#include <CoreAudio/AudioHardwareBase.h>
-		#include <CoreAudio/AudioHardware.h>
+		#include <CoreAudio/CoreAudio.h>
+		#include <CoreAudio/AudioHardwarePlugIn.h>
+		#include <CoreAudio/AudioServerPlugIn.h>
 	""")
 	outfile.close()
 
@@ -35,6 +35,9 @@ def parse_fourccs(preprocessed_path):
 	entries = []
 
 	for match in matches:
+		if fourcc_constant_blacklist_regex.search(match.group(1)):
+			continue
+
 		fcc = match.group(2)
 		raw_value = (ord(fcc[0]) << 24) | (ord(fcc[1]) << 16) | (ord(fcc[2]) << 8) | ord(fcc[3])
 		entries.append({"fourCC": fcc, "rawValue": raw_value, "constantName": match.group(1)})
@@ -52,5 +55,5 @@ generate_source(src_path)
 preprocess_source(src_path, preprocessed_path)
 clean_up_source(src_path)
 entries = parse_fourccs(preprocessed_path)
-clean_up_preprocessed(preprocessed_path)
+# clean_up_preprocessed(preprocessed_path)
 dump_fourcc_db(entries)

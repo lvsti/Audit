@@ -89,14 +89,20 @@ extension ObjectTreeViewController: NSOutlineViewDataSource {
         
         var image: NSImage?
         switch node.classID {
-        case AudioClass.plugIn: image = NSImage(named: NSImage.shareTemplateName)
-        case AudioClass.device: image = NSImage(named: NSImage.computerName)
-        case AudioClass.stream: image = NSImage(named: NSImage.slideshowTemplateName)
+        case _ where node.classID.isSubclass(of: AudioClass.plugIn):
+            image = NSImage(named: NSImage.shareTemplateName)
+        case _ where node.classID.isSubclass(of: AudioClass.device):
+            image = NSImage(named: NSImage.computerName)
+        case AudioClass.clockDevice:
+            image = NSImage(named: NSImage.touchBarAlarmTemplateName)
+        case AudioClass.stream:
+            image = NSImage(named: NSImage.slideshowTemplateName)
         case _ where node.classID.isSubclass(of: AudioClass.control):
             image = NSImage(named: NSImage.preferencesGeneralName)
         case _ where node.name == "System":
             image = NSImage(named: NSImage.networkName)
-        default: image = NSImage(named: NSImage.touchBarIconViewTemplateName)
+        default:
+            image = NSImage(named: NSImage.touchBarIconViewTemplateName)
         }
         
         view.imageView?.image = image

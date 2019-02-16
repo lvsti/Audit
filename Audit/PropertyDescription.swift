@@ -17,6 +17,7 @@ func fourCC(from value: UInt32) -> String? {
         UInt8((value >> 8) & 0xff),
         UInt8(value & 0xff)
     ]
+    guard chars.allSatisfy({ $0 != 0 }) else { return nil }
     return String(bytes: chars, encoding: .ascii)
 }
 
@@ -38,7 +39,10 @@ extension Property {
                      element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
                      qualifiedBy qualifier: QualifierProtocol? = nil,
                      in objectID: AudioObjectID) -> String? {
-
+        if case .translation(let fromType, let toType) = readSemantics {
+            return "<function: (\(fromType)) -> \(toType)>"
+        }
+        
         func getValue<T>() -> T? {
             return value(scope: scope, element: element, qualifiedBy: qualifier, in: objectID)
         }
@@ -65,7 +69,7 @@ extension Property {
                 return "\(value)"
             }
         case .fourCC, .classID:
-            if let value: AudioClassID = getValue() {
+            if let value: AudioClassID = getValue(), value != 0 {
                 if let fcc = fourCCDescription(from: value) {
                     return "\(fcc)"
                 }

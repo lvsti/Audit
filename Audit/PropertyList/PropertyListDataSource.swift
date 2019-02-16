@@ -85,11 +85,12 @@ class PropertyListDataSource {
                                   in: objectID)
         for prop in props {
             let isFourCC = prop.type == .fourCC || prop.type == .classID
+            let desc = prop.description(scope: scope, in: objectID)
             let item = PropertyListItem(property: prop,
                                         name: "\(prop)",
                                         isSettable: prop.isSettable(scope: scope, in: objectID),
-                                        value: prop.description(scope: scope, in: objectID) ?? "#ERROR",
-                                        fourCC: isFourCC ? prop.value(scope: scope, in: objectID) : nil)
+                                        value: desc ?? "#ERROR",
+                                        fourCC: isFourCC && desc != nil ? prop.value(scope: scope, in: objectID) : nil)
             propertyList.append(item)
         }
         return propertyList

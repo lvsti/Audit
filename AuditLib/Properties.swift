@@ -155,7 +155,7 @@ public enum ControlProperty: PropertySetInternal {
     
     static let descriptors: [ControlProperty: PropertyDescriptor] = [
         .scope: PropertyDescriptor(kAudioControlPropertyScope, .fourCC),
-        .element: PropertyDescriptor(kAudioControlPropertyElement, .fourCC)
+        .element: PropertyDescriptor(kAudioControlPropertyElement, .uint32)
     ]
 }
 

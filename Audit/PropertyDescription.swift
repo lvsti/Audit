@@ -69,7 +69,7 @@ extension Property {
                 return "\(value)"
             }
         case .fourCC, .classID:
-            if let value: AudioClassID = getValue(), value != 0 {
+            if let value: UInt32 = getValue(), value != 0 {
                 if let fcc = fourCCDescription(from: value) {
                     return "\(fcc)"
                 }
@@ -81,15 +81,15 @@ extension Property {
             }
         case .audioChannelLayout:
             if let value: AudioChannelLayout = getValue() {
-                return "AudioChannelLayout {}"
+                return "\(value)"
             }
         case .audioStreamBasicDescription:
             if let value: AudioStreamBasicDescription = getValue() {
-                return "AudioStreamBasicDescription {}"
+                return "\(value)"
             }
         case .audioValueRange:
             if let value: AudioValueRange = getValue() {
-                return "AudioValueRange {\(value.mMinimum), \(value.mMaximum)}"
+                return "\(value)"
             }
         case .pid:
             if let value: pid_t = getValue() {
@@ -105,11 +105,11 @@ extension Property {
             }
         case .arrayOfAudioValueRanges:
             if let value: [AudioValueRange] = getArrayValue() {
-                return "[" + value.map { "AudioValueRange {\($0.mMinimum), \($0.mMaximum)}" }.joined(separator: ", ") + "]"
+                return "[" + value.map { "\($0)" }.joined(separator: ", ") + "]"
             }
         case .arrayOfAudioStreamRangedDescriptions:
             if let value: [AudioStreamRangedDescription] = getArrayValue() {
-                return "[" + value.map { _ in "AudioStreamRangedDescription {}" }.joined(separator: ", ") + "]"
+                return "[" + value.map { "\($0)" }.joined(separator: ", ") + "]"
             }
         case .string:
             if let value: CFString = getValue() {

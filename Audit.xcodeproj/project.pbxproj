@@ -36,6 +36,7 @@
 		BE17939D221828110075FCA2 /* BrowserWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17939C221828110075FCA2 /* BrowserWindow.xib */; };
 		BE1793A12218326E0075FCA2 /* TranslationPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */; };
 		BE1793A22218326E0075FCA2 /* TranslationPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1793A02218326E0075FCA2 /* TranslationPanel.xib */; };
+		BE1793A92218AD170075FCA2 /* AudioChannelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1793A82218AD170075FCA2 /* AudioChannelLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		BE17939C221828110075FCA2 /* BrowserWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrowserWindow.xib; sourceTree = "<group>"; };
 		BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationPanelController.swift; sourceTree = "<group>"; };
 		BE1793A02218326E0075FCA2 /* TranslationPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TranslationPanel.xib; sourceTree = "<group>"; };
+		BE1793A82218AD170075FCA2 /* AudioChannelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioChannelLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				BE17934B2217524B0075FCA2 /* AppDelegate.swift */,
 				BE17934D2217524C0075FCA2 /* Assets.xcassets */,
 				BE17937122176E580075FCA2 /* AudioControl.swift */,
+				BE1793A82218AD170075FCA2 /* AudioChannelLayout.swift */,
 				BE1793752218182E0075FCA2 /* fourcc.json */,
 				BE1793762218182E0075FCA2 /* FourCCDatabase.swift */,
 				BE1793522217524C0075FCA2 /* Info.plist */,
@@ -355,6 +358,7 @@
 				BE179394221824330075FCA2 /* ObjectTreeViewController.swift in Sources */,
 				BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */,
 				BE179385221820310075FCA2 /* ValueCellView.swift in Sources */,
+				BE1793A92218AD170075FCA2 /* AudioChannelLayout.swift in Sources */,
 				BE179387221820720075FCA2 /* PropertyListDataSource.swift in Sources */,
 				BE17937422176E580075FCA2 /* PropertyDescription.swift in Sources */,
 				BE179399221827D80075FCA2 /* BrowserWindowController.swift in Sources */,

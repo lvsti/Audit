@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BrowserWindowController" customModule="Audit" customModuleProvider="target">
+            <connections>
+                <outlet property="adjustControlToolbarItem" destination="f3K-50-rmz" id="7hk-Ke-hbL"/>
+                <outlet property="scopeSelector" destination="elp-tu-Qf0" id="WMj-Aj-7wc"/>
+                <outlet property="toolbar" destination="SnL-ef-R2r" id="Nkk-5i-3Uv"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="rht-Cw-hZu"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" tabbingMode="disallowed" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="800" height="600"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+            <point key="canvasLocation" x="79" y="97"/>
+        </window>
+        <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="small" id="SnL-ef-R2r">
+            <allowedToolbarItems>
+                <toolbarItem implicitItemIdentifier="55994581-7281-4B4B-9983-2FA7247FB3A7" label="Reload Properties" paletteLabel="Reload Properties" tag="-1" image="reload" sizingBehavior="auto" autovalidates="NO" id="iAd-Zt-rky">
+                    <connections>
+                        <action selector="reloadClicked:" target="-2" id="ui2-j7-D59"/>
+                    </connections>
+                </toolbarItem>
+                <toolbarItem implicitItemIdentifier="75973E62-9AE4-4094-8867-A75149E5AB2A" label="Adjust Control" paletteLabel="Adjust Control" tag="-1" image="NSTouchBarComposeTemplate" sizingBehavior="auto" autovalidates="NO" id="f3K-50-rmz">
+                    <connections>
+                        <action selector="adjustControlClicked:" target="-2" id="BV1-ii-CM3"/>
+                    </connections>
+                </toolbarItem>
+                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="bvv-j9-AbF"/>
+            </allowedToolbarItems>
+            <defaultToolbarItems>
+                <toolbarItem reference="f3K-50-rmz"/>
+                <toolbarItem reference="bvv-j9-AbF"/>
+                <toolbarItem reference="bvv-j9-AbF"/>
+                <toolbarItem reference="iAd-Zt-rky"/>
+            </defaultToolbarItems>
+            <connections>
+                <outlet property="delegate" destination="-2" id="pjp-kG-TIG"/>
+            </connections>
+            <point key="canvasLocation" x="95" y="-175"/>
+        </toolbar>
+        <segmentedControl verticalHuggingPriority="750" id="elp-tu-Qf0">
+            <rect key="frame" x="0.0" y="0.0" width="64" height="23"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="0mH-VG-lTg">
+                <font key="font" metaFont="smallSystem"/>
+                <segments>
+                    <segment label="Global" selected="YES"/>
+                </segments>
+            </segmentedCell>
+            <connections>
+                <action selector="scopeSelectorChanged:" target="-2" id="Be2-TD-XJs"/>
+            </connections>
+        </segmentedControl>
+    </objects>
+    <resources>
+        <image name="NSTouchBarComposeTemplate" width="21" height="30"/>
+        <image name="reload" width="128" height="128"/>
+    </resources>
+</document>

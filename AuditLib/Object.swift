@@ -56,6 +56,8 @@ public enum AudioClass {
     public static let clipLightControl = AudioClassID(kAudioClipLightControlClassID)
     public static let talkbackControl = AudioClassID(kAudioTalkbackControlClassID)
     public static let listenbackControl = AudioClassID(kAudioListenbackControlClassID)
+    public static let donzControl = AudioClassID(0x646F6E7A) // 'donz'
+    public static let evisControl = AudioClassID(0x65766973) // 'evis'
 
     static let booleanControlClassIDs: Set<AudioClassID> = [
         AudioClass.muteControl,
@@ -66,7 +68,10 @@ public enum AudioClass {
         AudioClass.phaseInvertControl,
         AudioClass.clipLightControl,
         AudioClass.talkbackControl,
-        AudioClass.listenbackControl
+        AudioClass.listenbackControl,
+        
+        AudioClass.donzControl,
+        AudioClass.evisControl
     ]
 
     public static let selectorControl = AudioClassID(kAudioSelectorControlClassID)

@@ -22,8 +22,11 @@
 		BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17937922181E710075FCA2 /* LookupWindow.xib */; };
 		BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937A22181E710075FCA2 /* LookupWindow.swift */; };
 		BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937B22181E710075FCA2 /* LookupWindowController.swift */; };
+		BE17938B221821B70075FCA2 /* ObjectTreeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17938A221821B70075FCA2 /* ObjectTreeDataSource.swift */; };
 		BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17938D221823320075FCA2 /* QuickLookViewController.swift */; };
 		BE179390221823320075FCA2 /* QuickLookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17938E221823320075FCA2 /* QuickLookView.xib */; };
+		BE179394221824330075FCA2 /* ObjectTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE179393221824330075FCA2 /* ObjectTreeViewController.swift */; };
+		BE179396221824410075FCA2 /* ObjectTreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE179395221824410075FCA2 /* ObjectTreeView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +71,11 @@
 		BE17937922181E710075FCA2 /* LookupWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LookupWindow.xib; sourceTree = "<group>"; };
 		BE17937A22181E710075FCA2 /* LookupWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindow.swift; sourceTree = "<group>"; };
 		BE17937B22181E710075FCA2 /* LookupWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindowController.swift; sourceTree = "<group>"; };
+		BE17938A221821B70075FCA2 /* ObjectTreeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectTreeDataSource.swift; sourceTree = "<group>"; };
 		BE17938D221823320075FCA2 /* QuickLookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookViewController.swift; sourceTree = "<group>"; };
 		BE17938E221823320075FCA2 /* QuickLookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickLookView.xib; sourceTree = "<group>"; };
+		BE179393221824330075FCA2 /* ObjectTreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTreeViewController.swift; sourceTree = "<group>"; };
+		BE179395221824410075FCA2 /* ObjectTreeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObjectTreeView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,7 @@
 				BE1793522217524C0075FCA2 /* Info.plist */,
 				BE179392221823BB0075FCA2 /* LookupWindow */,
 				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
+				BE179389221821B70075FCA2 /* ObjectTree */,
 				BE17938C221823320075FCA2 /* QuickLook */,
 			);
 			path = Audit;
@@ -135,6 +142,16 @@
 				BE17936F22175FBF0075FCA2 /* Properties.swift */,
 			);
 			path = AuditLib;
+			sourceTree = "<group>";
+		};
+		BE179389221821B70075FCA2 /* ObjectTree */ = {
+			isa = PBXGroup;
+			children = (
+				BE17938A221821B70075FCA2 /* ObjectTreeDataSource.swift */,
+				BE179395221824410075FCA2 /* ObjectTreeView.xib */,
+				BE179393221824330075FCA2 /* ObjectTreeViewController.swift */,
+			);
+			path = ObjectTree;
 			sourceTree = "<group>";
 		};
 		BE17938C221823320075FCA2 /* QuickLook */ = {
@@ -253,6 +270,7 @@
 				BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */,
 				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
 				BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */,
+				BE179396221824410075FCA2 /* ObjectTreeView.xib in Resources */,
 				BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */,
 				BE179390221823320075FCA2 /* QuickLookView.xib in Resources */,
 			);
@@ -276,7 +294,9 @@
 				BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */,
 				BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */,
 				BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */,
+				BE17938B221821B70075FCA2 /* ObjectTreeDataSource.swift in Sources */,
 				BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */,
+				BE179394221824330075FCA2 /* ObjectTreeViewController.swift in Sources */,
 				BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

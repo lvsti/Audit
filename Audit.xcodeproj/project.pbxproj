@@ -17,6 +17,8 @@
 		BE17936E221758A10075FCA2 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17936D221758A10075FCA2 /* Object.swift */; };
 		BE17937022175FBF0075FCA2 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17936F22175FBF0075FCA2 /* Properties.swift */; };
 		BE17937322176E580075FCA2 /* AudioControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937122176E580075FCA2 /* AudioControl.swift */; };
+		BE1793772218182E0075FCA2 /* fourcc.json in Resources */ = {isa = PBXBuildFile; fileRef = BE1793752218182E0075FCA2 /* fourcc.json */; };
+		BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1793762218182E0075FCA2 /* FourCCDatabase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		BE17936D221758A10075FCA2 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		BE17936F22175FBF0075FCA2 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		BE17937122176E580075FCA2 /* AudioControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioControl.swift; sourceTree = "<group>"; };
+		BE1793752218182E0075FCA2 /* fourcc.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourcc.json; sourceTree = "<group>"; };
+		BE1793762218182E0075FCA2 /* FourCCDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourCCDatabase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				BE17937122176E580075FCA2 /* AudioControl.swift */,
+				BE1793752218182E0075FCA2 /* fourcc.json */,
+				BE1793762218182E0075FCA2 /* FourCCDatabase.swift */,
 				BE17934B2217524B0075FCA2 /* AppDelegate.swift */,
 				BE17934D2217524C0075FCA2 /* Assets.xcassets */,
 				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
@@ -214,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */,
+				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
 				BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +241,7 @@
 			files = (
 				BE17937322176E580075FCA2 /* AudioControl.swift in Sources */,
 				BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */,
+				BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

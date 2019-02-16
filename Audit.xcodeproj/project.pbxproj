@@ -31,6 +31,8 @@
 		BE179390221823320075FCA2 /* QuickLookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17938E221823320075FCA2 /* QuickLookView.xib */; };
 		BE179394221824330075FCA2 /* ObjectTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE179393221824330075FCA2 /* ObjectTreeViewController.swift */; };
 		BE179396221824410075FCA2 /* ObjectTreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE179395221824410075FCA2 /* ObjectTreeView.xib */; };
+		BE1793A12218326E0075FCA2 /* TranslationPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */; };
+		BE1793A22218326E0075FCA2 /* TranslationPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1793A02218326E0075FCA2 /* TranslationPanel.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		BE17938E221823320075FCA2 /* QuickLookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickLookView.xib; sourceTree = "<group>"; };
 		BE179393221824330075FCA2 /* ObjectTreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTreeViewController.swift; sourceTree = "<group>"; };
 		BE179395221824410075FCA2 /* ObjectTreeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObjectTreeView.xib; sourceTree = "<group>"; };
+		BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationPanelController.swift; sourceTree = "<group>"; };
+		BE1793A02218326E0075FCA2 /* TranslationPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TranslationPanel.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 		BE179383221820220075FCA2 /* PropertyList */ = {
 			isa = PBXGroup;
 			children = (
+				BE17939E2218326E0075FCA2 /* TranslationPanel */,
 				BE179386221820720075FCA2 /* PropertyListDataSource.swift */,
 				BE17938022181F410075FCA2 /* PropertyListView.xib */,
 				BE17937F22181F410075FCA2 /* PropertyListViewController.swift */,
@@ -191,6 +196,15 @@
 				BE17937B22181E710075FCA2 /* LookupWindowController.swift */,
 			);
 			path = LookupWindow;
+			sourceTree = "<group>";
+		};
+		BE17939E2218326E0075FCA2 /* TranslationPanel */ = {
+			isa = PBXGroup;
+			children = (
+				BE17939F2218326E0075FCA2 /* TranslationPanelController.swift */,
+				BE1793A02218326E0075FCA2 /* TranslationPanel.xib */,
+			);
+			path = TranslationPanel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +303,7 @@
 			files = (
 				BE17938222181F410075FCA2 /* PropertyListView.xib in Resources */,
 				BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */,
+				BE1793A22218326E0075FCA2 /* TranslationPanel.xib in Resources */,
 				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
 				BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */,
 				BE179396221824410075FCA2 /* ObjectTreeView.xib in Resources */,
@@ -315,6 +330,7 @@
 				BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */,
 				BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */,
 				BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */,
+				BE1793A12218326E0075FCA2 /* TranslationPanelController.swift in Sources */,
 				BE17938B221821B70075FCA2 /* ObjectTreeDataSource.swift in Sources */,
 				BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */,
 				BE17938122181F410075FCA2 /* PropertyListViewController.swift in Sources */,

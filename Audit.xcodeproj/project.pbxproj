@@ -118,9 +118,7 @@
 				BE1793752218182E0075FCA2 /* fourcc.json */,
 				BE1793762218182E0075FCA2 /* FourCCDatabase.swift */,
 				BE1793522217524C0075FCA2 /* Info.plist */,
-				BE17937A22181E710075FCA2 /* LookupWindow.swift */,
-				BE17937922181E710075FCA2 /* LookupWindow.xib */,
-				BE17937B22181E710075FCA2 /* LookupWindowController.swift */,
+				BE179392221823BB0075FCA2 /* LookupWindow */,
 				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
 				BE17938C221823320075FCA2 /* QuickLook */,
 			);
@@ -146,6 +144,16 @@
 				BE17938E221823320075FCA2 /* QuickLookView.xib */,
 			);
 			path = QuickLook;
+			sourceTree = "<group>";
+		};
+		BE179392221823BB0075FCA2 /* LookupWindow */ = {
+			isa = PBXGroup;
+			children = (
+				BE17937A22181E710075FCA2 /* LookupWindow.swift */,
+				BE17937922181E710075FCA2 /* LookupWindow.xib */,
+				BE17937B22181E710075FCA2 /* LookupWindowController.swift */,
+			);
+			path = LookupWindow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

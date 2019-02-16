@@ -13,6 +13,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
+    private var lookupWindowController: LookupWindowController!
+
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -22,6 +24,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    @IBAction private func showLookupWindow(_ sender: Any?) {
+        if lookupWindowController == nil {
+            lookupWindowController = LookupWindowController(window: nil)
+        }
+        lookupWindowController.showWindow(nil)
+    }
+    
+    func showLookupWindow(for fourCC: UInt32) {
+        showLookupWindow(nil)
+        lookupWindowController.show(for: fourCC)
+    }
+    
 
 }
 

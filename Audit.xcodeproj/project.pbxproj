@@ -22,6 +22,10 @@
 		BE17937C22181E710075FCA2 /* LookupWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17937922181E710075FCA2 /* LookupWindow.xib */; };
 		BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937A22181E710075FCA2 /* LookupWindow.swift */; };
 		BE17937E22181E710075FCA2 /* LookupWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937B22181E710075FCA2 /* LookupWindowController.swift */; };
+		BE17938122181F410075FCA2 /* PropertyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17937F22181F410075FCA2 /* PropertyListViewController.swift */; };
+		BE17938222181F410075FCA2 /* PropertyListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17938022181F410075FCA2 /* PropertyListView.xib */; };
+		BE179385221820310075FCA2 /* ValueCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE179384221820310075FCA2 /* ValueCellView.swift */; };
+		BE179387221820720075FCA2 /* PropertyListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE179386221820720075FCA2 /* PropertyListDataSource.swift */; };
 		BE17938B221821B70075FCA2 /* ObjectTreeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17938A221821B70075FCA2 /* ObjectTreeDataSource.swift */; };
 		BE17938F221823320075FCA2 /* QuickLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17938D221823320075FCA2 /* QuickLookViewController.swift */; };
 		BE179390221823320075FCA2 /* QuickLookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17938E221823320075FCA2 /* QuickLookView.xib */; };
@@ -71,6 +75,10 @@
 		BE17937922181E710075FCA2 /* LookupWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LookupWindow.xib; sourceTree = "<group>"; };
 		BE17937A22181E710075FCA2 /* LookupWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindow.swift; sourceTree = "<group>"; };
 		BE17937B22181E710075FCA2 /* LookupWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupWindowController.swift; sourceTree = "<group>"; };
+		BE17937F22181F410075FCA2 /* PropertyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListViewController.swift; sourceTree = "<group>"; };
+		BE17938022181F410075FCA2 /* PropertyListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyListView.xib; sourceTree = "<group>"; };
+		BE179384221820310075FCA2 /* ValueCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCellView.swift; sourceTree = "<group>"; };
+		BE179386221820720075FCA2 /* PropertyListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListDataSource.swift; sourceTree = "<group>"; };
 		BE17938A221821B70075FCA2 /* ObjectTreeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectTreeDataSource.swift; sourceTree = "<group>"; };
 		BE17938D221823320075FCA2 /* QuickLookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookViewController.swift; sourceTree = "<group>"; };
 		BE17938E221823320075FCA2 /* QuickLookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickLookView.xib; sourceTree = "<group>"; };
@@ -127,6 +135,7 @@
 				BE179392221823BB0075FCA2 /* LookupWindow */,
 				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
 				BE179389221821B70075FCA2 /* ObjectTree */,
+				BE179383221820220075FCA2 /* PropertyList */,
 				BE17938C221823320075FCA2 /* QuickLook */,
 			);
 			path = Audit;
@@ -142,6 +151,17 @@
 				BE17936F22175FBF0075FCA2 /* Properties.swift */,
 			);
 			path = AuditLib;
+			sourceTree = "<group>";
+		};
+		BE179383221820220075FCA2 /* PropertyList */ = {
+			isa = PBXGroup;
+			children = (
+				BE179386221820720075FCA2 /* PropertyListDataSource.swift */,
+				BE17938022181F410075FCA2 /* PropertyListView.xib */,
+				BE17937F22181F410075FCA2 /* PropertyListViewController.swift */,
+				BE179384221820310075FCA2 /* ValueCellView.swift */,
+			);
+			path = PropertyList;
 			sourceTree = "<group>";
 		};
 		BE179389221821B70075FCA2 /* ObjectTree */ = {
@@ -267,6 +287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE17938222181F410075FCA2 /* PropertyListView.xib in Resources */,
 				BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */,
 				BE1793772218182E0075FCA2 /* fourcc.json in Resources */,
 				BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */,
@@ -296,8 +317,11 @@
 				BE17937D22181E710075FCA2 /* LookupWindow.swift in Sources */,
 				BE17938B221821B70075FCA2 /* ObjectTreeDataSource.swift in Sources */,
 				BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */,
+				BE17938122181F410075FCA2 /* PropertyListViewController.swift in Sources */,
 				BE179394221824330075FCA2 /* ObjectTreeViewController.swift in Sources */,
 				BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */,
+				BE179385221820310075FCA2 /* ValueCellView.swift in Sources */,
+				BE179387221820720075FCA2 /* PropertyListDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

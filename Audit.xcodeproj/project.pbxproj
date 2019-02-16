@@ -140,7 +140,6 @@
 				BE179392221823BB0075FCA2 /* LookupWindow */,
 				BE179389221821B70075FCA2 /* ObjectTree */,
 				BE179383221820220075FCA2 /* PropertyList */,
-				BE17938C221823320075FCA2 /* QuickLook */,
 				BE17934B2217524B0075FCA2 /* AppDelegate.swift */,
 				BE17934D2217524C0075FCA2 /* Assets.xcassets */,
 				BE17937122176E580075FCA2 /* AudioControl.swift */,
@@ -168,6 +167,7 @@
 		BE179383221820220075FCA2 /* PropertyList */ = {
 			isa = PBXGroup;
 			children = (
+				BE17938C221823320075FCA2 /* QuickLook */,
 				BE17939E2218326E0075FCA2 /* TranslationPanel */,
 				BE179386221820720075FCA2 /* PropertyListDataSource.swift */,
 				BE17938022181F410075FCA2 /* PropertyListView.xib */,

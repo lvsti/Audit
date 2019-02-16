@@ -186,6 +186,21 @@ public extension Property {
         return status == kAudioHardwareNoError
     }
     
+    public func setArrayValue<T>(_ value: [T],
+                                 scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                                 element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
+                                 qualifiedBy qualifier: QualifierProtocol? = nil,
+                                 in objectID: AudioObjectID) -> Bool {
+        var address = AudioObjectPropertyAddress(selector, scope, element)
+        let dataSize = UInt32(MemoryLayout<T>.size * value.count)
+        var value = value
+
+        let status = AudioObjectSetPropertyData(objectID, &address,
+                                                UInt32(qualifier?.size ?? 0), qualifier?.data,
+                                                dataSize, &value)
+        return status == kAudioHardwareNoError
+    }
+
     public func translateValue<T>(_ value: T,
                                   scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                                   element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,

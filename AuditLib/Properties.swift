@@ -204,7 +204,7 @@ public enum StereoPanControlProperty: PropertySetInternal {
     
     static let descriptors: [StereoPanControlProperty: PropertyDescriptor] = [
         .value: PropertyDescriptor(kAudioStereoPanControlPropertyValue, .float32),
-        .panningChannels: PropertyDescriptor(kAudioStereoPanControlPropertyValue, .arrayOfUInt32s)
+        .panningChannels: PropertyDescriptor(kAudioStereoPanControlPropertyPanningChannels, .arrayOfUInt32s)
     ]
 }
 

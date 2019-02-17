@@ -133,32 +133,89 @@ extension Property {
         return nil
     }
     
-    func descriptionForTranslating<T>(_ value: T,
-                                      scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
-                                      element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                                      in objectID: AudioObjectID) -> String? {
-        guard case .translation(let fromType, let toType) = readSemantics else {
-            return nil
-        }
-        
-        func getTranslatedValue<U>() -> U? {
+    func descriptionForReading(withInput parameter: String,
+                               scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                               element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
+                               in objectID: AudioObjectID) -> String? {
+        func getTranslatedValue<U>(from fromType: PropertyType) -> U? {
             switch fromType {
             case .float32:
-                return translateValue(value, scope: scope, element: element, in: objectID) as? U
+                return value(scope: scope, element: element, for: Float(parameter), in: objectID) as! U?
             default:
                 break
             }
             return nil
         }
-
-        switch toType {
-        case .float32:
-            if let value: Float = getTranslatedValue() {
-                return "\(value)"
+        
+        func getQualifiedValue<U>(from fromType: PropertyType) -> U? {
+            switch fromType {
+            case .string:
+                return value(scope: scope,
+                             element: element,
+                             qualifiedBy: Qualifier(from: parameter as CFString),
+                             in: objectID)
+            case .uint32:
+                return value(scope: scope,
+                             element: element,
+                             qualifiedBy: Qualifier(from: UInt32(parameter)),
+                             in: objectID)
+            default:
+                break
             }
-        default:
-            break
+            return nil
         }
+        
+        func getQualifiedArrayValue<U>(from fromType: PropertyType) -> [U]? {
+            switch fromType {
+            case .arrayOfClassIDs:
+                let array = parameter
+                    .split(separator: ",")
+                    .compactMap { UInt32($0.trimmingCharacters(in: .whitespaces)) }
+                return arrayValue(scope: scope, element: element, qualifiedBy: Qualifier(fromArray: array), in: objectID)
+            default:
+                break
+            }
+            return nil
+        }
+        
+        switch readSemantics {
+        case .translation(let fromType, let toType):
+            switch toType {
+            case .float32:
+                if let value: Float = getTranslatedValue(from: fromType) {
+                    return "\(value)"
+                }
+            default:
+                break
+            }
+
+        case .qualifiedRead(let qtype), .optionallyQualifiedRead(let qtype):
+            switch type {
+            case .uint32:
+                if let value: UInt32 = getQualifiedValue(from: qtype) {
+                    return "\(value)"
+                }
+            case .objectID:
+                if let value: AudioObjectID = getQualifiedValue(from: qtype) {
+                    return value != kAudioObjectUnknown ? "@\(value)" : "<null>"
+                }
+            case .arrayOfObjectIDs:
+                if let value: [AudioObjectID] = getQualifiedArrayValue(from: qtype) {
+                    return "[" + value.map { $0 != kAudioObjectUnknown ? "@\($0)" : "<null>" }.joined(separator: ", ") + "]"
+                }
+            case .string:
+                if let value: CFString = getQualifiedValue(from: qtype) {
+                    return "\(value)"
+                }
+
+            default:
+                break
+            }
+
+        default:
+            return nil
+        }
+        
 
         return nil
     }

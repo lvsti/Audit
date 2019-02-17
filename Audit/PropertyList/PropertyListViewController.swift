@@ -73,26 +73,19 @@ final class PropertyListViewController: NSViewController {
         }
 
         let item = dataSource.items[tableView.selectedRow]
-        
-        switch item.property.readSemantics {
-        case .translation:
-            showTranslationPanel(for: item.property, in: node.objectID)
-//        case .qualifiedRead(let qtype), .optionallyQualifiedRead(let qtype):
-//            break
-        default:
-            return
-        }
+        showTranslationPanel(for: item.property, in: node.objectID)
     }
 
     private func showTranslationPanel(for property: Property, in objectID: AudioObjectID) {
         guard translationPanelController == nil else {
             return
         }
-        
-        guard case .translation = property.readSemantics else {
-            return
+
+        switch property.readSemantics {
+        case .translation, .qualifiedRead, .optionallyQualifiedRead: break
+        default: return
         }
-        
+
         translationPanelController = TranslationPanelController(property: property, objectID: objectID)
         translationPanelController.delegate = self
         view.window?.beginSheet(translationPanelController.window!) { _ in

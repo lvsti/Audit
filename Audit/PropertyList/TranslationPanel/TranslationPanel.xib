@@ -6,9 +6,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="TranslationPanelController" customModule="Cameo" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="TranslationPanelController" customModule="Audit" customModuleProvider="target">
             <connections>
+                <outlet property="actionButton" destination="buO-KW-PMW" id="IVd-OO-MGJ"/>
                 <outlet property="sourceField" destination="VcT-gR-aFJ" id="gvj-3k-2WS"/>
+                <outlet property="sourceLabel" destination="nF3-RM-RQE" id="vIH-Cs-wg7"/>
                 <outlet property="valueLabel" destination="EL8-14-1Sd" id="lWL-YF-STW"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="6jM-8l-J25"/>
             </connections>
@@ -28,7 +30,6 @@
                         <rect key="frame" x="122" y="83" width="200" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="lRb-2M-I1A"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="vZ8-sY-Jhd"/>
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="8sH-at-uVn">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -88,7 +89,7 @@ Gw
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nF3-RM-RQE" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="0WP-GW-YCe"/>
+                    <constraint firstItem="nF3-RM-RQE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="0WP-GW-YCe"/>
                     <constraint firstItem="buO-KW-PMW" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="19" id="0l4-Sv-Z9E"/>
                     <constraint firstAttribute="trailing" secondItem="buO-KW-PMW" secondAttribute="trailing" constant="20" id="0oa-aK-bgv"/>
                     <constraint firstItem="nF3-RM-RQE" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="3wM-xT-cnI"/>

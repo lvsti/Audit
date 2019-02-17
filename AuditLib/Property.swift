@@ -25,7 +25,15 @@ public class Qualifier<T>: QualifierProtocol {
         let typedData = data.bindMemory(to: T.self, capacity: 1)
         typedData.pointee = scalar
     }
-    
+
+    public init(fromArray array: [T]) {
+        size = MemoryLayout<T>.size * array.count
+        data = UnsafeMutableRawPointer.allocate(byteCount: size, alignment: MemoryLayout<T>.alignment)
+        let typedData = data.bindMemory(to: T.self, capacity: array.count)
+        let buf = UnsafeMutableBufferPointer<T>(start: typedData, count: array.count)
+        _ = buf.initialize(from: array)
+    }
+
     deinit {
         data.deallocate()
     }

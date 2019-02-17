@@ -39,8 +39,10 @@ extension Property {
                      element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
                      qualifiedBy qualifier: QualifierProtocol? = nil,
                      in objectID: AudioObjectID) -> String? {
-        if case .translation(let fromType, let toType) = readSemantics {
-            return "<function: (\(fromType)) -> \(toType)>"
+        switch readSemantics {
+        case .translation(let fromType, let toType): return "<function: (\(fromType)) -> \(toType)>"
+        case .qualifiedRead(let qtype): return "<function: (\(qtype)) -> \(type)>"
+        default: break
         }
         
         func getValue<T>() -> T? {

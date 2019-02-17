@@ -114,10 +114,12 @@ public extension Property {
 
     public func value<T>(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                          element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
+                         for inputValue: T? = nil,
                          qualifiedBy qualifier: QualifierProtocol? = nil,
                          in objectID: AudioObjectID) -> T? {
         switch readSemantics {
         case .qualifiedRead where qualifier == nil: return nil
+        case .translation where inputValue == nil: return nil
         default: break
         }
         
@@ -125,7 +127,10 @@ public extension Property {
         var dataSize = UInt32(MemoryLayout<T>.size)
         var data = UnsafeMutableRawPointer.allocate(byteCount: Int(dataSize), alignment: MemoryLayout<T>.alignment)
         defer { data.deallocate() }
-        
+        if let inputValue = inputValue {
+            data.assumingMemoryBound(to: T.self).pointee = inputValue
+        }
+
         let status = AudioObjectGetPropertyData(objectID, &address,
                                                 UInt32(qualifier?.size ?? 0), qualifier?.data,
                                                 &dataSize, data)
@@ -199,31 +204,6 @@ public extension Property {
                                                 UInt32(qualifier?.size ?? 0), qualifier?.data,
                                                 dataSize, &value)
         return status == kAudioHardwareNoError
-    }
-
-    public func translateValue<T>(_ value: T,
-                                  scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
-                                  element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                                  in objectID: AudioObjectID) -> T? {
-        guard case .translation = readSemantics else {
-            return nil
-        }
-        
-        var address = AudioObjectPropertyAddress(selector, scope, element)
-        var dataSize = UInt32(MemoryLayout<T>.size)
-        var data = UnsafeMutableRawPointer.allocate(byteCount: Int(dataSize), alignment: MemoryLayout<T>.alignment)
-        defer { data.deallocate() }
-        data.assumingMemoryBound(to: T.self).pointee = value
-
-        let status = AudioObjectGetPropertyData(objectID, &address,
-                                                0, nil,
-                                                &dataSize, &data)
-        guard status == kAudioHardwareNoError else {
-            return nil
-        }
-        
-        let typedData = data.bindMemory(to: T.self, capacity: 1)
-        return typedData.pointee
     }
 
     public func addListener(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,

@@ -99,6 +99,8 @@ extension ObjectTreeViewController: NSOutlineViewDataSource {
             image = NSImage(named: NSImage.slideshowTemplateName)
         case _ where node.classID.isSubclass(of: AudioClass.control):
             image = NSImage(named: NSImage.preferencesGeneralName)
+        case _ where node.classID.isSubclass(of: AudioClass.box):
+            image = NSImage(named: NSImage.touchBarRecordStopTemplateName)
         case _ where node.name == "System":
             image = NSImage(named: NSImage.networkName)
         default:

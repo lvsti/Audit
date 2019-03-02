@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import AuditLib
+import HALLib
 
 protocol TranslationPanelControllerDelegate: class {
     func translationPanelDidDismiss()

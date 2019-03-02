@@ -8,7 +8,7 @@
 
 import Cocoa
 import CoreAudio
-import AuditLib
+import HALLib
 
 final class BrowserWindowController: NSWindowController {
     

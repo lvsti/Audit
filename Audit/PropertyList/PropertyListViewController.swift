@@ -9,7 +9,7 @@
 import Cocoa
 import CoreAudio
 import Carbon.HIToolbox
-import AuditLib
+import HALLib
 
 final class PropertyListViewController: NSViewController {
     

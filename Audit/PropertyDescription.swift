@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreAudio
-import AuditLib
+import HALLib
 
 func fourCC(from value: UInt32) -> String? {
     let chars: [UInt8] = [

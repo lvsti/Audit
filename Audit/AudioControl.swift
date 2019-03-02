@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreAudio
-import AuditLib
+import HALLib
 
 struct SliderControlModel {
     var controlID: AudioObjectID = AudioObjectID(kAudioObjectUnknown)

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import AuditLib
+import HALLib
 
 protocol AdjustControlPanelControllerDelegate: class {
     func adjustControlPanelDidDismiss()

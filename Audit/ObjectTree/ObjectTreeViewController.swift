@@ -8,7 +8,7 @@
 
 import Cocoa
 import CoreAudio
-import AuditLib
+import HALLib
 
 protocol ObjectTreeViewDelegate: class {
     func objectTreeDidSelectNode(_ node: AudioNode?)

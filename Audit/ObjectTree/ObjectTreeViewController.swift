@@ -8,7 +8,7 @@
 
 import Cocoa
 import CoreAudio
-import HALLib
+import HALKit
 
 protocol ObjectTreeViewDelegate: class {
     func objectTreeDidSelectNode(_ node: AudioNode?)

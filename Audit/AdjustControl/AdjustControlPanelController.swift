@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import HALLib
+import HALKit
 
 protocol AdjustControlPanelControllerDelegate: class {
     func adjustControlPanelDidDismiss()

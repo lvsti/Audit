@@ -1,6 +1,6 @@
 //
 //  Object.swift
-//  HALLib
+//  HALKit
 //
 //  Created by Tamás Lustyik on 2019. 02. 15..
 //  Copyright © 2019. Tamas Lustyik. All rights reserved.

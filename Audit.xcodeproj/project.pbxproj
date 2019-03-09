@@ -10,9 +10,9 @@
 		BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17934B2217524B0075FCA2 /* AppDelegate.swift */; };
 		BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17934D2217524C0075FCA2 /* Assets.xcassets */; };
 		BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17934F2217524C0075FCA2 /* MainMenu.xib */; };
-		BE179362221753F40075FCA2 /* HALLib.h in Headers */ = {isa = PBXBuildFile; fileRef = BE179360221753F40075FCA2 /* HALLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE179365221753F40075FCA2 /* HALLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE17935E221753F40075FCA2 /* HALLib.framework */; };
-		BE179366221753F40075FCA2 /* HALLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE17935E221753F40075FCA2 /* HALLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE179362221753F40075FCA2 /* HALKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BE179360221753F40075FCA2 /* HALKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE179365221753F40075FCA2 /* HALKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE17935E221753F40075FCA2 /* HALKit.framework */; };
+		BE179366221753F40075FCA2 /* HALKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE17935E221753F40075FCA2 /* HALKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE17936C221754170075FCA2 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17936B221754170075FCA2 /* Property.swift */; };
 		BE17936E221758A10075FCA2 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17936D221758A10075FCA2 /* Object.swift */; };
 		BE17937022175FBF0075FCA2 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17936F22175FBF0075FCA2 /* Properties.swift */; };
@@ -58,7 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE179366221753F40075FCA2 /* HALLib.framework in Embed Frameworks */,
+				BE179366221753F40075FCA2 /* HALKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,8 +71,8 @@
 		BE17934D2217524C0075FCA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1793502217524C0075FCA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BE1793522217524C0075FCA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE17935E221753F40075FCA2 /* HALLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HALLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE179360221753F40075FCA2 /* HALLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HALLib.h; sourceTree = "<group>"; };
+		BE17935E221753F40075FCA2 /* HALKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HALKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE179360221753F40075FCA2 /* HALKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HALKit.h; sourceTree = "<group>"; };
 		BE179361221753F40075FCA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE17936B221754170075FCA2 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		BE17936D221758A10075FCA2 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE179365221753F40075FCA2 /* HALLib.framework in Frameworks */,
+				BE179365221753F40075FCA2 /* HALKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				BE17934A2217524B0075FCA2 /* Audit */,
-				BE17935F221753F40075FCA2 /* HALLib */,
+				BE17935F221753F40075FCA2 /* HALKit */,
 				BE1793492217524B0075FCA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1793482217524B0075FCA2 /* Audit.app */,
-				BE17935E221753F40075FCA2 /* HALLib.framework */,
+				BE17935E221753F40075FCA2 /* HALKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,16 +160,16 @@
 			path = Audit;
 			sourceTree = "<group>";
 		};
-		BE17935F221753F40075FCA2 /* HALLib */ = {
+		BE17935F221753F40075FCA2 /* HALKit */ = {
 			isa = PBXGroup;
 			children = (
-				BE179360221753F40075FCA2 /* HALLib.h */,
+				BE179360221753F40075FCA2 /* HALKit.h */,
 				BE179361221753F40075FCA2 /* Info.plist */,
 				BE17936B221754170075FCA2 /* Property.swift */,
 				BE17936D221758A10075FCA2 /* Object.swift */,
 				BE17936F22175FBF0075FCA2 /* Properties.swift */,
 			);
-			path = HALLib;
+			path = HALKit;
 			sourceTree = "<group>";
 		};
 		BE179383221820220075FCA2 /* PropertyList */ = {
@@ -248,7 +248,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE179362221753F40075FCA2 /* HALLib.h in Headers */,
+				BE179362221753F40075FCA2 /* HALKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,9 +274,9 @@
 			productReference = BE1793482217524B0075FCA2 /* Audit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BE17935D221753F40075FCA2 /* HALLib */ = {
+		BE17935D221753F40075FCA2 /* HALKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE179367221753F40075FCA2 /* Build configuration list for PBXNativeTarget "HALLib" */;
+			buildConfigurationList = BE179367221753F40075FCA2 /* Build configuration list for PBXNativeTarget "HALKit" */;
 			buildPhases = (
 				BE179359221753F40075FCA2 /* Headers */,
 				BE17935A221753F40075FCA2 /* Sources */,
@@ -287,9 +287,9 @@
 			);
 			dependencies = (
 			);
-			name = HALLib;
+			name = HALKit;
 			productName = AuditLib;
-			productReference = BE17935E221753F40075FCA2 /* HALLib.framework */;
+			productReference = BE17935E221753F40075FCA2 /* HALKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -325,7 +325,7 @@
 			projectRoot = "";
 			targets = (
 				BE1793472217524B0075FCA2 /* Audit */,
-				BE17935D221753F40075FCA2 /* HALLib */,
+				BE17935D221753F40075FCA2 /* HALKit */,
 			);
 		};
 /* End PBXProject section */
@@ -396,7 +396,7 @@
 /* Begin PBXTargetDependency section */
 		BE179364221753F40075FCA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BE17935D221753F40075FCA2 /* HALLib */;
+			target = BE17935D221753F40075FCA2 /* HALKit */;
 			targetProxy = BE179363221753F40075FCA2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -575,14 +575,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = HALLib/Info.plist;
+				INFOPLIST_FILE = HALKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.HALLib;
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.HALKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -605,14 +605,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = HALLib/Info.plist;
+				INFOPLIST_FILE = HALKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.HALLib;
+				PRODUCT_BUNDLE_IDENTIFIER = me.cocoagrinder.HALKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -642,7 +642,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE179367221753F40075FCA2 /* Build configuration list for PBXNativeTarget "HALLib" */ = {
+		BE179367221753F40075FCA2 /* Build configuration list for PBXNativeTarget "HALKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE179368221753F40075FCA2 /* Debug */,

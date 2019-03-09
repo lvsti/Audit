@@ -8,7 +8,7 @@
 
 import Cocoa
 import CoreAudio
-import HALLib
+import HALKit
 
 final class BrowserWindowController: NSWindowController {
     

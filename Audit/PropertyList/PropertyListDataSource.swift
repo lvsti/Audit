@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreAudio
-import HALLib
+import HALKit
 
 struct PropertyListItem {
     var property: Property

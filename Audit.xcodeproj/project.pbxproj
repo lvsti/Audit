@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE06C0F7223464A90022192D /* Qualifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE06C0F6223464A90022192D /* Qualifier.swift */; };
 		BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17934B2217524B0075FCA2 /* AppDelegate.swift */; };
 		BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17934D2217524C0075FCA2 /* Assets.xcassets */; };
 		BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17934F2217524C0075FCA2 /* MainMenu.xib */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE06C0F6223464A90022192D /* Qualifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qualifier.swift; sourceTree = "<group>"; };
 		BE1793482217524B0075FCA2 /* Audit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE17934B2217524B0075FCA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE17934D2217524C0075FCA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,9 +167,10 @@
 			children = (
 				BE179360221753F40075FCA2 /* HALKit.h */,
 				BE179361221753F40075FCA2 /* Info.plist */,
-				BE17936B221754170075FCA2 /* Property.swift */,
 				BE17936D221758A10075FCA2 /* Object.swift */,
 				BE17936F22175FBF0075FCA2 /* Properties.swift */,
+				BE17936B221754170075FCA2 /* Property.swift */,
+				BE06C0F6223464A90022192D /* Qualifier.swift */,
 			);
 			path = HALKit;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE06C0F7223464A90022192D /* Qualifier.swift in Sources */,
 				BE17937022175FBF0075FCA2 /* Properties.swift in Sources */,
 				BE17936E221758A10075FCA2 /* Object.swift in Sources */,
 				BE17936C221754170075FCA2 /* Property.swift in Sources */,

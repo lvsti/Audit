@@ -11,17 +11,40 @@ import CoreAudio
 
 
 public enum PropertyReadSemantics {
-    case read, translation(PropertyType, PropertyType), optionallyQualifiedRead(PropertyType), qualifiedRead(PropertyType)
+    /// value written to provided buffer
+    case read
+    
+    /// value in provided buffer is used, result is written back to buffer (in/out types are the same)
+    case mutatingRead
+    
+    /// value in provided buffer is used, no result is written
+    case inboundOnly
+    
+    /// value in provided buffer is used, no result is written but the status code of the operation may be of interest
+    case inboundOnlyWithStatus
+    
+    /// special case of `mutatingRead`: an AudioValueTranslation object is provided with the input
+    /// and returned in place with the output
+    case translation(PropertyType, PropertyType)
+    
+    /// data in the qualifier is used, result is written to provided buffer
+    case qualifiedRead(PropertyType)
+    
+    /// data in the qualifier is used if any, result is written to provided buffer
+    case optionallyQualifiedRead(PropertyType)
 }
 
 public enum PropertyType {
     case boolean32, uint32, float32, float64, fourCC,
         classID, objectID,
         audioChannelLayout, audioStreamBasicDescription, audioValueRange,
-        pid
+        pid,
+        ioProcStreamUsage, audioValueTranslation, audioBufferList,
+        cString
     case arrayOfObjectIDs, arrayOfStreamIDs, arrayOfClassIDs, arrayOfAudioValueRanges,
-        arrayOfUInt32s, arrayOfAudioStreamRangedDescriptions
-    case string, url, dictionary
+        arrayOfUInt32s, arrayOfAudioStreamRangedDescriptions, arrayOfAudioStreamBasicDescriptions
+    case string, url, dictionary, runLoop
+    case arrayOfStrings
 }
 
 public enum AudioObjectProperty {

@@ -26,7 +26,7 @@ final class ObjectTreeDataSource {
     
     func reload() {
         tree = AudioNode(objectID: AudioObject.system,
-                         classID: AudioClass.object,
+                         classID: AudioClass.system,
                          name: "System",
                          children: AudioChildren(of: AudioObject.system))
     }

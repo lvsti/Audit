@@ -11,9 +11,11 @@ import CoreAudio
 
 public enum AudioObject {
     public static let system = AudioObjectID(kAudioObjectSystemObject)
+    public static let unknown = AudioObjectID(kAudioObjectUnknown)
 }
 
 public enum AudioClass {
+    public static let system = AudioClassID(kAudioSystemObjectClassID)
     public static let object = AudioClassID(kAudioObjectClassID)
     public static let plugIn = AudioClassID(kAudioPlugInClassID)
     public static let transportManager = AudioClassID(kAudioTransportManagerClassID)
@@ -27,10 +29,14 @@ public enum AudioClass {
     public static let endPointDevice = AudioClassID(kAudioEndPointDeviceClassID)
     public static let endPoint = AudioClassID(kAudioEndPointClassID)
     public static let stream = AudioClassID(kAudioStreamClassID)
+    public static let aggregateDevice = AudioClassID(kAudioAggregateDeviceClassID)
+    public static let subDevice = AudioClassID(kAudioSubDeviceClassID)
     
     static let deviceClassIDs: Set<AudioClassID> = [
         AudioClass.endPointDevice,
-        AudioClass.endPoint
+        AudioClass.endPoint,
+        AudioClass.aggregateDevice,
+        AudioClass.subDevice
     ]
 
     public static let control = AudioClassID(kAudioControlClassID)
@@ -40,10 +46,12 @@ public enum AudioClass {
     public static let levelControl = AudioClassID(kAudioLevelControlClassID)
     public static let volumeControl = AudioClassID(kAudioVolumeControlClassID)
     public static let lfeVolumeControl = AudioClassID(kAudioLFEVolumeControlClassID)
+    public static let bootChimeVolumeControl = AudioClassID(kAudioBootChimeVolumeControlClassID)
 
     static let levelControlClassIDs: Set<AudioClassID> = [
         AudioClass.volumeControl,
-        AudioClass.lfeVolumeControl
+        AudioClass.lfeVolumeControl,
+        AudioClass.bootChimeVolumeControl
     ]
 
     public static let booleanControl = AudioClassID(kAudioBooleanControlClassID)
@@ -56,6 +64,7 @@ public enum AudioClass {
     public static let clipLightControl = AudioClassID(kAudioClipLightControlClassID)
     public static let talkbackControl = AudioClassID(kAudioTalkbackControlClassID)
     public static let listenbackControl = AudioClassID(kAudioListenbackControlClassID)
+    public static let iSubOwnerControl = AudioClassID(kAudioISubOwnerControlClassID)
     public static let donzControl = AudioClassID(0x646F6E7A) // 'donz'
     public static let evisControl = AudioClassID(0x65766973) // 'evis'
 
@@ -69,6 +78,7 @@ public enum AudioClass {
         AudioClass.clipLightControl,
         AudioClass.talkbackControl,
         AudioClass.listenbackControl,
+        AudioClass.iSubOwnerControl,
         
         AudioClass.donzControl,
         AudioClass.evisControl

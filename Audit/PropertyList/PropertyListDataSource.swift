@@ -42,18 +42,40 @@ class PropertyListDataSource {
 
         items.append(contentsOf: properties(from: ObjectProperty.self, scope: scope, in: node.objectID))
 
-        if node.classID.isSubclass(of: AudioClass.device) {
+        if node.classID == AudioClass.system {
+            items.append(contentsOf: properties(from: SystemProperty.self, scope: scope, in: node.objectID))
+            items.append(contentsOf: properties(from: SystemProperty_Deprecated.self, scope: scope, in: node.objectID))
+        }
+        else if node.classID.isSubclass(of: AudioClass.transportManager) {
+            items.append(contentsOf: properties(from: TransportManagerProperty.self, scope: scope, in: node.objectID))
+        }
+        else if node.classID.isSubclass(of: AudioClass.box) {
+            items.append(contentsOf: properties(from: BoxProperty.self, scope: scope, in: node.objectID))
+        }
+        else if node.classID.isSubclass(of: AudioClass.device) {
             items.append(contentsOf: properties(from: DeviceProperty.self, scope: scope, in: node.objectID))
+            items.append(contentsOf: properties(from: DeviceProperty_Deprecated.self, scope: scope, in: node.objectID))
             
             if node.classID.isSubclass(of: AudioClass.endPointDevice) {
                 items.append(contentsOf: properties(from: EndPointDeviceProperty.self, scope: scope, in: node.objectID))
             }
+            else if node.classID.isSubclass(of: AudioClass.aggregateDevice) {
+                items.append(contentsOf: properties(from: AggregateDeviceProperty.self, scope: scope, in: node.objectID))
+            }
+            else if node.classID.isSubclass(of: AudioClass.subDevice) {
+                items.append(contentsOf: properties(from: SubDeviceProperty.self, scope: scope, in: node.objectID))
+            }
+        }
+        else if node.classID.isSubclass(of: AudioClass.clockDevice) {
+            items.append(contentsOf: properties(from: ClockDeviceProperty.self, scope: scope, in: node.objectID))
         }
         else if node.classID.isSubclass(of: AudioClass.stream) {
             items.append(contentsOf: properties(from: StreamProperty.self, scope: scope, in: node.objectID))
+            items.append(contentsOf: properties(from: StreamProperty_Deprecated.self, scope: scope, in: node.objectID))
         }
         else if node.classID.isSubclass(of: AudioClass.control) {
             items.append(contentsOf: properties(from: ControlProperty.self, scope: scope, in: node.objectID))
+            items.append(contentsOf: properties(from: ControlProperty_Deprecated.self, scope: scope, in: node.objectID))
             
             if node.classID.isSubclass(of: AudioClass.booleanControl) {
                 items.append(contentsOf: properties(from: BooleanControlProperty.self, scope: scope, in: node.objectID))
@@ -66,6 +88,7 @@ class PropertyListDataSource {
             }
             else if node.classID.isSubclass(of: AudioClass.levelControl) {
                 items.append(contentsOf: properties(from: LevelControlProperty.self, scope: scope, in: node.objectID))
+                items.append(contentsOf: properties(from: LevelControlProperty_Deprecated.self, scope: scope, in: node.objectID))
             }
             else if node.classID.isSubclass(of: AudioClass.stereoPanControl) {
                 items.append(contentsOf: properties(from: StereoPanControlProperty.self, scope: scope, in: node.objectID))

@@ -25,6 +25,7 @@ struct LevelControlModel {
     var dbValue: Float = 0
     var dbRangeMin: Float = 0
     var dbRangeMax: Float = 0
+    var transferFunction: AudioLevelControlTransferFunction = .tranferFunctionLinear
 }
 
 struct BooleanControlModel {
@@ -70,10 +71,10 @@ enum AudioError: Error {
 
 enum Control {
     static func model(for controlID: AudioObjectID) -> ControlModel? {
-        let cfName: CFString = ObjectProperty.name.value(in: controlID) ?? "(untitled)" as CFString
+        let cfName: CFString = (try? ObjectProperty.name.value(in: controlID)) ?? "(untitled)" as CFString
 
         guard
-            let classID: AudioClassID = ObjectProperty.class.value(in: controlID)
+            let classID: AudioClassID = try? ObjectProperty.class.value(in: controlID)
         else {
             return nil
         }
@@ -82,8 +83,8 @@ enum Control {
         
         if classID.isSubclass(of: AudioClass.sliderControl) {
             guard
-                let value: UInt32 = SliderControlProperty.value.value(in: controlID),
-                let range: [UInt32] = SliderControlProperty.range.value(in: controlID)
+                let value: UInt32 = try? SliderControlProperty.value.value(in: controlID),
+                let range: [UInt32] = try? SliderControlProperty.range.value(in: controlID)
             else {
                 return nil
             }
@@ -96,9 +97,10 @@ enum Control {
         }
         else if classID.isSubclass(of: AudioClass.levelControl) {
             guard
-                let scalarValue: Float = LevelControlProperty.scalarValue.value(in: controlID),
-                let dbValue: Float = LevelControlProperty.decibelValue.value(in: controlID),
-                let dbRange: AudioValueRange = LevelControlProperty.decibelRange.value(in: controlID)
+                let scalarValue: Float = try? LevelControlProperty.scalarValue.value(in: controlID),
+                let dbValue: Float = try? LevelControlProperty.decibelValue.value(in: controlID),
+                let dbRange: AudioValueRange = try? LevelControlProperty.decibelRange.value(in: controlID),
+                let transferFunction: UInt32 = try? LevelControlProperty_Deprecated.decibelsToScalarTransferFunction.value(in: controlID)
             else {
                 return nil
             }
@@ -108,11 +110,12 @@ enum Control {
                                             scalarValue: scalarValue,
                                             dbValue: dbValue,
                                             dbRangeMin: Float(dbRange.mMinimum),
-                                            dbRangeMax: Float(dbRange.mMaximum)))
+                                            dbRangeMax: Float(dbRange.mMaximum),
+                                            transferFunction: AudioLevelControlTransferFunction(rawValue: transferFunction)!))
         }
         else if classID.isSubclass(of: AudioClass.booleanControl) {
             guard
-                let value: UInt32 = BooleanControlProperty.value.value(in: controlID)
+                let value: UInt32 = try? BooleanControlProperty.value.value(in: controlID)
             else {
                 return nil
             }
@@ -121,17 +124,17 @@ enum Control {
         }
         else if classID.isSubclass(of: AudioClass.selectorControl) {
             guard
-                let itemIDs: [UInt32] = SelectorControlProperty.availableItems.arrayValue(in: controlID),
+                let itemIDs: [UInt32] = try? SelectorControlProperty.availableItems.arrayValue(in: controlID),
                 let items: [SelectorControlModel.Item] = try? itemIDs.map({
                     guard
-                        let cfItemName: CFString = SelectorControlProperty.itemName.value(qualifiedBy: Qualifier(from: $0), in: controlID),
-                        let itemKind: UInt32 = SelectorControlProperty.itemKind.value(qualifiedBy: Qualifier(from: $0), in: controlID) ?? 0
+                        let cfItemName: CFString = try? SelectorControlProperty.itemName.value(in: controlID, qualifiedBy: Qualifier(from: $0)),
+                        let itemKind: UInt32 = try? SelectorControlProperty.itemKind.value(in: controlID, qualifiedBy: Qualifier(from: $0)) ?? 0
                     else {
                         throw AudioError.unknown
                     }
                     return SelectorControlModel.Item(id: $0, title: cfItemName as String, kind: itemKind)
                 }),
-                let currentItemIDs: [UInt32] = SelectorControlProperty.currentItem.arrayValue(in: controlID)
+                let currentItemIDs: [UInt32] = try? SelectorControlProperty.currentItem.arrayValue(in: controlID)
             else {
                 return nil
             }
@@ -143,8 +146,8 @@ enum Control {
         }
         else if classID.isSubclass(of: AudioClass.stereoPanControl) {
             guard
-                let value: Float = StereoPanControlProperty.value.value(in: controlID),
-                let panning: [UInt32] = StereoPanControlProperty.panningChannels.value(in: controlID)
+                let value: Float = try? StereoPanControlProperty.value.value(in: controlID),
+                let panning: [UInt32] = try? StereoPanControlProperty.panningChannels.value(in: controlID)
             else {
                 return nil
             }

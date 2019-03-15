@@ -46,11 +46,11 @@ extension Property {
         }
         
         func getValue<T>() -> T? {
-            return value(scope: scope, element: element, qualifiedBy: qualifier, in: objectID)
+            return try? value(in: objectID, scope: scope, element: element, qualifiedBy: qualifier)
         }
 
         func getArrayValue<T>() -> [T]? {
-            return arrayValue(scope: scope, element: element, qualifiedBy: qualifier, in: objectID)
+            return try? arrayValue(in: objectID, scope: scope, element: element, qualifiedBy: qualifier)
         }
 
         switch type {
@@ -140,7 +140,7 @@ extension Property {
         func getTranslatedValue<U>(from fromType: PropertyType) -> U? {
             switch fromType {
             case .float32:
-                return value(scope: scope, element: element, for: Float(parameter), in: objectID) as! U?
+                return (try? value(in: objectID, scope: scope, element: element, for: Float(parameter))) as! U?
             default:
                 break
             }
@@ -150,15 +150,15 @@ extension Property {
         func getQualifiedValue<U>(from fromType: PropertyType) -> U? {
             switch fromType {
             case .string:
-                return value(scope: scope,
-                             element: element,
-                             qualifiedBy: Qualifier(from: parameter as CFString),
-                             in: objectID)
+                return try? value(in: objectID,
+                                  scope: scope,
+                                  element: element,
+                                  qualifiedBy: Qualifier(from: parameter as CFString))
             case .uint32:
-                return value(scope: scope,
-                             element: element,
-                             qualifiedBy: Qualifier(from: UInt32(parameter)),
-                             in: objectID)
+                return try? value(in: objectID,
+                                  scope: scope,
+                                  element: element,
+                                  qualifiedBy: Qualifier(from: UInt32(parameter)))
             default:
                 break
             }
@@ -171,7 +171,7 @@ extension Property {
                 let array = parameter
                     .split(separator: ",")
                     .compactMap { UInt32($0.trimmingCharacters(in: .whitespaces)) }
-                return arrayValue(scope: scope, element: element, qualifiedBy: Qualifier(fromArray: array), in: objectID)
+                return try? arrayValue(in: objectID, scope: scope, element: element, qualifiedBy: Qualifier(fromArray: array))
             default:
                 break
             }

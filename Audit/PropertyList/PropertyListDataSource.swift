@@ -111,9 +111,9 @@ class PropertyListDataSource {
             let desc = prop.description(scope: scope, in: objectID)
             let item = PropertyListItem(property: prop,
                                         name: "\(prop)",
-                                        isSettable: prop.isSettable(scope: scope, in: objectID),
+                                        isSettable: prop.isSettable(in: objectID, scope: scope),
                                         value: desc ?? "#ERROR",
-                                        fourCC: isFourCC && desc != nil ? prop.value(scope: scope, in: objectID) : nil)
+                                        fourCC: isFourCC && desc != nil ? try? prop.value(in: objectID, scope: scope) : nil)
             propertyList.append(item)
         }
         return propertyList

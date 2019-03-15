@@ -10,6 +10,12 @@ import Foundation
 import CoreAudio
 
 
+enum HALKitError: Error {
+    case missingQualifier
+    case missingInputValue
+    case halError(OSStatus)
+}
+
 public enum PropertyReadSemantics {
     /// value written to provided buffer
     case read
@@ -86,22 +92,26 @@ public extension PropertySet {
     static func allExisting(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                             element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
                             in objectID: AudioObjectID) -> [Self] {
-        return allCases.filter { $0.exists(scope: scope, element: element, in: objectID) }
+        return allCases.filter { $0.exists(in: objectID, scope: scope, element: element) }
     }
 }
 
 public extension Property {
-    public func exists(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
-                       element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                       in objectID: AudioObjectID) -> Bool {
+    public func show(in objectID: AudioObjectID) {
+        AudioObjectShow(objectID)
+    }
+    
+    public func exists(in objectID: AudioObjectID,
+                       scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                       element: AudioObjectPropertyElement = AudioObjectProperty.Element.any) -> Bool {
         var address = AudioObjectPropertyAddress(selector, scope, element)
         
         return AudioObjectHasProperty(objectID, &address)
     }
     
-    public func isSettable(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
-                           element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                           in objectID: AudioObjectID) -> Bool {
+    public func isSettable(in objectID: AudioObjectID,
+                           scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                           element: AudioObjectPropertyElement = AudioObjectProperty.Element.any) -> Bool {
         var address = AudioObjectPropertyAddress(selector, scope, element)
         
         var isSettable: DarwinBoolean = false
@@ -114,17 +124,20 @@ public extension Property {
         return isSettable.boolValue
     }
 
-    public func value<T>(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+    public func value<T>(in objectID: AudioObjectID,
+                         scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                          element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
                          for inputValue: T? = nil,
-                         qualifiedBy qualifier: QualifierProtocol? = nil,
-                         in objectID: AudioObjectID) -> T? {
+                         qualifiedBy qualifier: QualifierProtocol? = nil) throws -> T {
         switch readSemantics {
-        case .qualifiedRead where qualifier == nil: return nil
-        case .translation where inputValue == nil: return nil
+        case .qualifiedRead where qualifier == nil: throw HALKitError.missingQualifier
+        case .translation, .mutatingRead, .inboundOnly, .inboundOnlyWithStatus:
+            if inputValue == nil {
+                throw HALKitError.missingInputValue
+            }
         default: break
         }
-        
+
         var address = AudioObjectPropertyAddress(selector, scope, element)
         var dataSize = UInt32(MemoryLayout<T>.size)
         var data = UnsafeMutableRawPointer.allocate(byteCount: Int(dataSize), alignment: MemoryLayout<T>.alignment)
@@ -137,22 +150,27 @@ public extension Property {
                                                 UInt32(qualifier?.size ?? 0), qualifier?.data,
                                                 &dataSize, data)
         guard status == kAudioHardwareNoError else {
-            return nil
+            throw HALKitError.halError(status)
         }
-        
+
         let typedData = data.bindMemory(to: T.self, capacity: 1)
         return typedData.pointee
     }
     
-    public func arrayValue<T>(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+    public func arrayValue<T>(in objectID: AudioObjectID,
+                              scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                               element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                              qualifiedBy qualifier: QualifierProtocol? = nil,
-                              in objectID: AudioObjectID) -> [T]? {
+                              for inputValue: [T]? = nil,
+                              qualifiedBy qualifier: QualifierProtocol? = nil) throws -> [T] {
         switch readSemantics {
-        case .qualifiedRead where qualifier == nil: return nil
+        case .qualifiedRead where qualifier == nil: throw HALKitError.missingQualifier
+        case .translation, .mutatingRead, .inboundOnly, .inboundOnlyWithStatus:
+            if inputValue == nil {
+                throw HALKitError.missingInputValue
+            }
         default: break
         }
-        
+
         var address = AudioObjectPropertyAddress(selector, scope, element)
         var dataSize: UInt32 = 0
         
@@ -160,29 +178,35 @@ public extension Property {
                                                     UInt32(qualifier?.size ?? 0), qualifier?.data,
                                                     &dataSize)
         guard status == kAudioHardwareNoError else {
-            return nil
+            throw HALKitError.halError(status)
         }
         
         let count = Int(dataSize) / MemoryLayout<T>.size
         var data = UnsafeMutableRawPointer.allocate(byteCount: Int(dataSize), alignment: MemoryLayout<T>.alignment)
         defer { data.deallocate() }
+        let typedData = data.bindMemory(to: T.self, capacity: count)
         
+        if let inputValue = inputValue {
+            for index in 0 ..< min(count, inputValue.count) {
+                typedData.advanced(by: index).pointee = inputValue[index]
+            }
+        }
+
         status = AudioObjectGetPropertyData(objectID, &address,
                                             UInt32(qualifier?.size ?? 0), qualifier?.data,
                                             &dataSize, data)
         guard status == kAudioHardwareNoError else {
-            return nil
+            throw HALKitError.halError(status)
         }
         
-        let typedData = data.bindMemory(to: T.self, capacity: count)
         return UnsafeBufferPointer<T>(start: typedData, count: count).map { $0 }
     }
     
     public func setValue<T>(_ value: T,
+                            in objectID: AudioObjectID,
                             scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                             element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                            qualifiedBy qualifier: QualifierProtocol? = nil,
-                            in objectID: AudioObjectID) -> Bool {
+                            qualifiedBy qualifier: QualifierProtocol? = nil) throws {
         var address = AudioObjectPropertyAddress(selector, scope, element)
         let dataSize = UInt32(MemoryLayout<T>.size)
         var value = value
@@ -190,14 +214,17 @@ public extension Property {
         let status = AudioObjectSetPropertyData(objectID, &address,
                                                UInt32(qualifier?.size ?? 0), qualifier?.data,
                                                dataSize, &value)
-        return status == kAudioHardwareNoError
+
+        guard status == kAudioHardwareNoError else {
+            throw HALKitError.halError(status)
+        }
     }
     
     public func setArrayValue<T>(_ value: [T],
+                                 in objectID: AudioObjectID,
                                  scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                                  element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                                 qualifiedBy qualifier: QualifierProtocol? = nil,
-                                 in objectID: AudioObjectID) -> Bool {
+                                 qualifiedBy qualifier: QualifierProtocol? = nil) throws {
         var address = AudioObjectPropertyAddress(selector, scope, element)
         let dataSize = UInt32(MemoryLayout<T>.size * value.count)
         var value = value
@@ -205,17 +232,20 @@ public extension Property {
         let status = AudioObjectSetPropertyData(objectID, &address,
                                                 UInt32(qualifier?.size ?? 0), qualifier?.data,
                                                 dataSize, &value)
-        return status == kAudioHardwareNoError
+
+        guard status == kAudioHardwareNoError else {
+            throw HALKitError.halError(status)
+        }
     }
 
-    public func addListener(scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+    public func addListener(in objectID: AudioObjectID,
+                            scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
                             element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
-                            in objectID: AudioObjectID,
                             queue: DispatchQueue? = nil,
-                            block: @escaping ([AudioObjectPropertyAddress]) -> Void) -> PropertyListener? {
+                            block: @escaping ([AudioObjectPropertyAddress]) -> Void) throws -> PropertyListener {
         let address = AudioObjectPropertyAddress(selector, scope, element)
         
-        return PropertyListenerImpl(objectID: objectID, address: address, queue: queue) { addressCount, addressPtr in
+        return try PropertyListenerImpl(objectID: objectID, address: address, queue: queue) { addressCount, addressPtr in
             guard addressCount > 0 else { return }
             block(UnsafeBufferPointer(start: addressPtr, count: Int(addressCount)).map { $0 })
         }
@@ -228,6 +258,28 @@ public extension Property {
         
         return listener.deactivate()
     }
+    
+    public func dataSize(in objectID: AudioObjectID,
+                         scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                         element: AudioObjectPropertyElement = AudioObjectProperty.Element.any,
+                         qualifiedBy qualifier: QualifierProtocol? = nil) throws -> Int {
+        switch readSemantics {
+        case .qualifiedRead where qualifier == nil: throw HALKitError.missingQualifier
+        default: break
+        }
+        
+        var address = AudioObjectPropertyAddress(selector, scope, element)
+        var dataSize: UInt32 = 0
+        
+        let status = AudioObjectGetPropertyDataSize(objectID, &address,
+                                                    UInt32(qualifier?.size ?? 0), qualifier?.data,
+                                                    &dataSize)
+        guard status == kAudioHardwareNoError else {
+            throw HALKitError.halError(status)
+        }
+        
+        return Int(dataSize)
+    }
 }
 
 public protocol PropertyListener {}
@@ -239,10 +291,10 @@ class PropertyListenerImpl: PropertyListener {
     private let block: AudioObjectPropertyListenerBlock
     private var isActive: Bool
     
-    init?(objectID: AudioObjectID,
-          address: AudioObjectPropertyAddress,
-          queue: DispatchQueue?,
-          block: @escaping AudioObjectPropertyListenerBlock) {
+    init(objectID: AudioObjectID,
+         address: AudioObjectPropertyAddress,
+         queue: DispatchQueue?,
+         block: @escaping AudioObjectPropertyListenerBlock) throws {
         self.objectID = objectID
         self.address = address
         self.queue = queue
@@ -251,7 +303,7 @@ class PropertyListenerImpl: PropertyListener {
         var address = address
         let status = AudioObjectAddPropertyListenerBlock(objectID, &address, queue, block)
         guard status == kAudioHardwareNoError else {
-            return nil
+            throw HALKitError.halError(status)
         }
         
         isActive = true

@@ -165,7 +165,7 @@ final class AdjustControlPanelController: NSWindowController {
         model.value = booleanValueCheckbox.state == .on
         
         guard
-            BooleanControlProperty.value.setValue(UInt32(model.value ? 1 : 0), in: model.controlID)
+            (try? BooleanControlProperty.value.setValue(UInt32(model.value ? 1 : 0), in: model.controlID)) != nil
         else {
             updateUI()
             return
@@ -184,7 +184,7 @@ final class AdjustControlPanelController: NSWindowController {
             .map { $0.element.id }
         
         guard
-            SelectorControlProperty.currentItem.setArrayValue(model.currentItemIDs, in: model.controlID)
+            (try? SelectorControlProperty.currentItem.setArrayValue(model.currentItemIDs, in: model.controlID)) != nil
         else {
             updateUI()
             return
@@ -201,7 +201,7 @@ final class AdjustControlPanelController: NSWindowController {
         model.value = UInt32(sliderValueSlider.intValue)
         
         guard
-            SliderControlProperty.value.setValue(model.value, in: model.controlID)
+            (try? SliderControlProperty.value.setValue(model.value, in: model.controlID)) != nil
         else {
             updateUI()
             return
@@ -218,7 +218,7 @@ final class AdjustControlPanelController: NSWindowController {
         model.value = UInt32(sliderValueTextField.intValue)
         
         guard
-            SliderControlProperty.value.setValue(model.value, in: model.controlID)
+            (try? SliderControlProperty.value.setValue(model.value, in: model.controlID)) != nil
         else {
             updateUI()
             return
@@ -235,13 +235,13 @@ final class AdjustControlPanelController: NSWindowController {
         model.dbValue = levelValueSlider.floatValue
         
         guard
-            LevelControlProperty.decibelValue.setValue(model.dbValue, in: model.controlID)
+            (try? LevelControlProperty.decibelValue.setValue(model.dbValue, in: model.controlID)) != nil
         else {
             updateUI()
             return
         }
         
-        model.scalarValue = LevelControlProperty.scalarValue.value(in: model.controlID) ?? 0
+        model.scalarValue = (try? LevelControlProperty.scalarValue.value(in: model.controlID)) ?? 0
         
         controlModel = .level(model)
     }
@@ -254,13 +254,13 @@ final class AdjustControlPanelController: NSWindowController {
         model.dbValue = levelValueTextField.floatValue
         
         guard
-            LevelControlProperty.decibelValue.setValue(model.dbValue, in: model.controlID)
+            (try? LevelControlProperty.decibelValue.setValue(model.dbValue, in: model.controlID)) != nil
         else {
             updateUI()
             return
         }
         
-        model.scalarValue = LevelControlProperty.scalarValue.value(in: model.controlID) ?? 0
+        model.scalarValue = (try? LevelControlProperty.scalarValue.value(in: model.controlID)) ?? 0
         
         controlModel = .level(model)
     }

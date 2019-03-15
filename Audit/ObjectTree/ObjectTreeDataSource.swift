@@ -34,11 +34,11 @@ final class ObjectTreeDataSource {
     private func AudioChildren(of objectID: AudioObjectID) -> [AudioNode] {
         var nodes: [AudioNode] = []
         
-        if let children: [AudioObjectID] = ObjectProperty.ownedObjects.arrayValue(in: objectID) {
+        if let children: [AudioObjectID] = try? ObjectProperty.ownedObjects.arrayValue(in: objectID) {
             for child in children {
                 let subtree = AudioChildren(of: child)
                 let name = ObjectProperty.name.description(in: child) ?? "<untitled @\(child)>"
-                let classID: AudioClassID = ObjectProperty.class.value(in: child) ?? AudioClass.object
+                let classID: AudioClassID = (try? ObjectProperty.class.value(in: child)) ?? AudioClass.object
                 nodes.append(AudioNode(objectID: child,
                                        classID: classID,
                                        name: name.isEmpty ? "<untitled @\(child)>" : name,

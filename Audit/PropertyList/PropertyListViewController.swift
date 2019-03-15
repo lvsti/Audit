@@ -121,9 +121,11 @@ extension PropertyListViewController: NSTableViewDelegate {
             view.textField?.stringValue = item.name
             switch item.property.readSemantics {
             case .read: view.imageView?.image = #imageLiteral(resourceName: "read")
-            case .translation: view.imageView?.image = #imageLiteral(resourceName: "translation")
+            case .mutatingRead, .translation: view.imageView?.image = #imageLiteral(resourceName: "translation")
             case .qualifiedRead: view.imageView?.image = #imageLiteral(resourceName: "qualified")
             case .optionallyQualifiedRead: view.imageView?.image = #imageLiteral(resourceName: "qualified_opt")
+            case .inboundOnly: view.imageView?.image = #imageLiteral(resourceName: "inbound")
+            case .inboundOnlyWithStatus: view.imageView?.image = #imageLiteral(resourceName: "inbound_status")
             }
             
             return view

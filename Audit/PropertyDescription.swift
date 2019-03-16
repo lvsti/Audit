@@ -41,7 +41,10 @@ extension Property {
                      in objectID: AudioObjectID) -> String? {
         switch readSemantics {
         case .translation(let fromType, let toType): return "<function: (\(fromType)) -> \(toType)>"
+        case .mutatingRead: return "<function: (\(type)) -> \(type)>"
         case .qualifiedRead(let qtype): return "<function: (\(qtype)) -> \(type)>"
+        case .inboundOnly: return "<function: (\(type)) -> void>"
+        case .inboundOnlyWithStatus: return "<function: (\(type)) -> boolean>"
         default: break
         }
         
@@ -97,6 +100,23 @@ extension Property {
             if let value: pid_t = getValue() {
                 return "\(value)"
             }
+        case .ioProcStreamUsage:
+            if let value: AudioHardwareIOProcStreamUsage = getValue() {
+                return "\(value)"
+            }
+        case .audioBufferList:
+            if let value: AudioBufferList = getValue() {
+                return "\(value)"
+            }
+        case .cString:
+            if let value: [CChar] = getArrayValue() {
+                let ptr = UnsafeMutablePointer<CChar>.allocate(capacity: value.count)
+                for idx in 0..<value.count {
+                    ptr.advanced(by: idx).pointee = value[idx]
+                }
+                defer { ptr.deallocate() }
+                return "\(String(cString: ptr))"
+            }
         case .arrayOfUInt32s:
             if let value: [UInt32] = getArrayValue() {
                 return "\(value)"
@@ -105,12 +125,27 @@ extension Property {
             if let value: [AudioObjectID] = getArrayValue() {
                 return "[" + value.map { $0 != kAudioObjectUnknown ? "@\($0)" : "<null>" }.joined(separator: ", ") + "]"
             }
+        case .arrayOfClassIDs:
+            if let value: [AudioClassID] = getArrayValue() {
+                return "[" + value
+                    .map {
+                        if let fcc = fourCCDescription(from: $0) {
+                            return "\(fcc)"
+                        }
+                        return "\($0)"
+                    }
+                    .joined(separator: ", ") + "]"
+            }
         case .arrayOfAudioValueRanges:
             if let value: [AudioValueRange] = getArrayValue() {
                 return "[" + value.map { "\($0)" }.joined(separator: ", ") + "]"
             }
         case .arrayOfAudioStreamRangedDescriptions:
             if let value: [AudioStreamRangedDescription] = getArrayValue() {
+                return "[" + value.map { "\($0)" }.joined(separator: ", ") + "]"
+            }
+        case .arrayOfAudioStreamBasicDescriptions:
+            if let value: [AudioStreamBasicDescription] = getArrayValue() {
                 return "[" + value.map { "\($0)" }.joined(separator: ", ") + "]"
             }
         case .string:
@@ -124,6 +159,10 @@ extension Property {
         case .dictionary:
             if let value: CFDictionary = getValue() {
                 return "\(value)"
+            }
+        case .arrayOfStrings:
+            if let value: [CFString] = getValue() {
+                return "[" + value.map { "\($0)" }.joined(separator: ", ") + "]"
             }
 
         default:

@@ -19,10 +19,38 @@ struct PropertyListItem {
 }
 
 class PropertyListDataSource {
-    private(set) var items: [PropertyListItem] = []
+    private(set) var sections: [(String, [PropertyListItem])] = []
+    var items: [PropertyListItem] {
+        return sections.flatMap { $0.1 }
+    }
+    
+    func indexPathForRow(_ row: Int) -> IndexPath? {
+        var offset = 0
+        var section = 0
+        while row > offset {
+            if row <= offset + sections[section].1.count {
+                break
+            }
+            offset += sections[section].1.count + 1
+            section += 1
+            
+            if section >= sections.count {
+                return nil
+            }
+        }
+        return IndexPath(item: row - offset, section: section)
+    }
+    
+    func itemForRow(_ row: Int) -> PropertyListItem? {
+        guard let indexPath = indexPathForRow(row) else {
+            return nil
+        }
+        
+        return indexPath.item == 0 ? nil : sections[indexPath.section].1[indexPath.item - 1]
+    }
     
     func reload(forNode node: AudioNode?, scope: AudioObjectPropertyScope) {
-        items.removeAll()
+        sections.removeAll()
         
         guard let node = node else {
             return
@@ -34,68 +62,68 @@ class PropertyListDataSource {
             let readSemantics: PropertyReadSemantics = .read
         }
         
-        items.append(PropertyListItem(property: ObjectID(),
-                                      name: "objectID",
-                                      isSettable: false,
-                                      value: "@\(node.objectID)",
-                                      fourCC: nil))
+        let selfItem = PropertyListItem(property: ObjectID(),
+                                        name: "objectID",
+                                        isSettable: false,
+                                        value: "@\(node.objectID)",
+                                        fourCC: nil)
 
-        items.append(contentsOf: properties(from: ObjectProperty.self, scope: scope, in: node.objectID))
+        sections.append(("Object", [selfItem] + properties(from: ObjectProperty.self, scope: scope, in: node.objectID)))
 
         if node.classID == AudioClass.system {
-            items.append(contentsOf: properties(from: SystemProperty.self, scope: scope, in: node.objectID))
-            items.append(contentsOf: properties(from: SystemProperty_Deprecated.self, scope: scope, in: node.objectID))
+            sections.append(("SystemObject", properties(from: SystemProperty.self, scope: scope, in: node.objectID)))
+            sections.append(("SystemObject (deprecated)", properties(from: SystemProperty_Deprecated.self, scope: scope, in: node.objectID)))
         }
         else if node.classID.isSubclass(of: AudioClass.transportManager) {
-            items.append(contentsOf: properties(from: TransportManagerProperty.self, scope: scope, in: node.objectID))
+            sections.append(("TransportManager", properties(from: TransportManagerProperty.self, scope: scope, in: node.objectID)))
         }
         else if node.classID.isSubclass(of: AudioClass.box) {
-            items.append(contentsOf: properties(from: BoxProperty.self, scope: scope, in: node.objectID))
+            sections.append(("Box", properties(from: BoxProperty.self, scope: scope, in: node.objectID)))
         }
         else if node.classID.isSubclass(of: AudioClass.device) {
-            items.append(contentsOf: properties(from: DeviceProperty.self, scope: scope, in: node.objectID))
-            items.append(contentsOf: properties(from: DeviceProperty_Deprecated.self, scope: scope, in: node.objectID))
+            sections.append(("Device", properties(from: DeviceProperty.self, scope: scope, in: node.objectID)))
+            sections.append(("Device (deprecated)", properties(from: DeviceProperty_Deprecated.self, scope: scope, in: node.objectID)))
             
             if node.classID.isSubclass(of: AudioClass.endPointDevice) {
-                items.append(contentsOf: properties(from: EndPointDeviceProperty.self, scope: scope, in: node.objectID))
+                sections.append(("EndPointDevice", properties(from: EndPointDeviceProperty.self, scope: scope, in: node.objectID)))
             }
             else if node.classID.isSubclass(of: AudioClass.aggregateDevice) {
-                items.append(contentsOf: properties(from: AggregateDeviceProperty.self, scope: scope, in: node.objectID))
+                sections.append(("AggregateDevice", properties(from: AggregateDeviceProperty.self, scope: scope, in: node.objectID)))
             }
             else if node.classID.isSubclass(of: AudioClass.subDevice) {
-                items.append(contentsOf: properties(from: SubDeviceProperty.self, scope: scope, in: node.objectID))
+                sections.append(("SubDevice", properties(from: SubDeviceProperty.self, scope: scope, in: node.objectID)))
             }
         }
         else if node.classID.isSubclass(of: AudioClass.clockDevice) {
-            items.append(contentsOf: properties(from: ClockDeviceProperty.self, scope: scope, in: node.objectID))
+            sections.append(("ClockDevice", properties(from: ClockDeviceProperty.self, scope: scope, in: node.objectID)))
         }
         else if node.classID.isSubclass(of: AudioClass.stream) {
-            items.append(contentsOf: properties(from: StreamProperty.self, scope: scope, in: node.objectID))
-            items.append(contentsOf: properties(from: StreamProperty_Deprecated.self, scope: scope, in: node.objectID))
+            sections.append(("Stream", properties(from: StreamProperty.self, scope: scope, in: node.objectID)))
+            sections.append(("Stream (deprecated)", properties(from: StreamProperty_Deprecated.self, scope: scope, in: node.objectID)))
         }
         else if node.classID.isSubclass(of: AudioClass.control) {
-            items.append(contentsOf: properties(from: ControlProperty.self, scope: scope, in: node.objectID))
-            items.append(contentsOf: properties(from: ControlProperty_Deprecated.self, scope: scope, in: node.objectID))
+            sections.append(("Control", properties(from: ControlProperty.self, scope: scope, in: node.objectID)))
+            sections.append(("Control (deprecated)", properties(from: ControlProperty_Deprecated.self, scope: scope, in: node.objectID)))
             
             if node.classID.isSubclass(of: AudioClass.booleanControl) {
-                items.append(contentsOf: properties(from: BooleanControlProperty.self, scope: scope, in: node.objectID))
+                sections.append(("BooleanControl", properties(from: BooleanControlProperty.self, scope: scope, in: node.objectID)))
             }
             else if node.classID.isSubclass(of: AudioClass.selectorControl) {
-                items.append(contentsOf: properties(from: SelectorControlProperty.self, scope: scope, in: node.objectID))
+                sections.append(("SelectorControl", properties(from: SelectorControlProperty.self, scope: scope, in: node.objectID)))
             }
             else if node.classID.isSubclass(of: AudioClass.sliderControl) {
-                items.append(contentsOf: properties(from: SliderControlProperty.self, scope: scope, in: node.objectID))
+                sections.append(("SliderControl", properties(from: SliderControlProperty.self, scope: scope, in: node.objectID)))
             }
             else if node.classID.isSubclass(of: AudioClass.levelControl) {
-                items.append(contentsOf: properties(from: LevelControlProperty.self, scope: scope, in: node.objectID))
-                items.append(contentsOf: properties(from: LevelControlProperty_Deprecated.self, scope: scope, in: node.objectID))
+                sections.append(("LevelControl", properties(from: LevelControlProperty.self, scope: scope, in: node.objectID)))
+                sections.append(("LevelControl (deprecated)", properties(from: LevelControlProperty_Deprecated.self, scope: scope, in: node.objectID)))
             }
             else if node.classID.isSubclass(of: AudioClass.stereoPanControl) {
-                items.append(contentsOf: properties(from: StereoPanControlProperty.self, scope: scope, in: node.objectID))
+                sections.append(("StereoPanControl", properties(from: StereoPanControlProperty.self, scope: scope, in: node.objectID)))
             }
         }
         else if node.classID == AudioClass.plugIn {
-            items.append(contentsOf: properties(from: PlugInProperty.self, scope: scope, in: node.objectID))
+            sections.append(("PlugIn", properties(from: PlugInProperty.self, scope: scope, in: node.objectID)))
         }
     }
     

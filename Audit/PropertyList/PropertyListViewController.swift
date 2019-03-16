@@ -68,11 +68,13 @@ final class PropertyListViewController: NSViewController {
     }
     
     @IBAction private func tableRowDoubleClicked(_ sender: Any) {
-        guard let node = currentNode else {
+        guard
+            let node = currentNode,
+            let item = dataSource.itemForRow(tableView.selectedRow)
+        else {
             return
         }
 
-        let item = dataSource.items[tableView.selectedRow]
         showTranslationPanel(for: item.property, in: node.objectID)
     }
 
@@ -103,17 +105,32 @@ final class PropertyListViewController: NSViewController {
 
 extension PropertyListViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return dataSource.items.count
+        return dataSource.sections.count + dataSource.sections.reduce(0) { $0 + $1.1.count }
     }
 }
 
 extension PropertyListViewController: NSTableViewDelegate {
+    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
+        return dataSource.indexPathForRow(row)!.item == 0
+    }
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let indexPath = dataSource.indexPathForRow(row) else {
+            return nil
+        }
+        
+        if indexPath.item == 0 {
+            let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GroupCell"),
+                                          owner: nil) as! NSTextField
+            view.stringValue = " " + dataSource.sections[indexPath.section].0
+            return view
+        }
+        
         guard let column = tableColumn else {
             return nil
         }
         
-        let item = dataSource.items[row]
+        let item = dataSource.itemForRow(row)!
         
         if column.identifier.rawValue == "propertyColumn" {
             let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "PropertyCell"),
@@ -160,7 +177,11 @@ extension PropertyListViewController: NSTableViewDelegate {
 extension PropertyListViewController: ValueCellDelegate {
     func valueCellDidClickLinkButton(_ sender: ValueCellView) {
         let clickedRow = tableView.row(for: sender)
-        guard clickedRow >= 0, let fourCC = dataSource.items[clickedRow].fourCC else {
+        guard
+            clickedRow >= 0,
+            let item = dataSource.itemForRow(clickedRow),
+            let fourCC = item.fourCC
+        else {
             return
         }
         

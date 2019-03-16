@@ -13,6 +13,7 @@ import CoreAudio
 enum HALKitError: Error {
     case missingQualifier
     case missingInputValue
+    case invalidOperation
     case halError(OSStatus)
 }
 
@@ -236,6 +237,36 @@ public extension Property {
         guard status == kAudioHardwareNoError else {
             throw HALKitError.halError(status)
         }
+    }
+
+    public func translateValue<T, U>(_ value: T,
+                                     in objectID: AudioObjectID,
+                                     scope: AudioObjectPropertyScope = AudioObjectProperty.Scope.any,
+                                     element: AudioObjectPropertyElement = AudioObjectProperty.Element.any) throws -> U {
+        guard case .translation = readSemantics else {
+            throw HALKitError.invalidOperation
+        }
+        
+        var address = AudioObjectPropertyAddress(selector, scope, element)
+        var dataSize = UInt32(MemoryLayout<AudioValueTranslation>.size)
+        var value = value
+        var translatedValue = UnsafeMutablePointer<U>.allocate(capacity: 1)
+        defer { translatedValue.deallocate() }
+        
+        var translation = AudioValueTranslation(mInputData: &value,
+                                                mInputDataSize: UInt32(MemoryLayout<T>.size),
+                                                mOutputData: translatedValue,
+                                                mOutputDataSize: UInt32(MemoryLayout<U>.size))
+        
+        let status = AudioObjectGetPropertyData(objectID, &address,
+                                                0, nil,
+                                                &dataSize,
+                                                &translation)
+        guard status == kAudioHardwareNoError else {
+            throw HALKitError.halError(status)
+        }
+        
+        return translatedValue.pointee
     }
 
     public func addListener(in objectID: AudioObjectID,

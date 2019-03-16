@@ -178,8 +178,12 @@ extension Property {
                                in objectID: AudioObjectID) -> String? {
         func getTranslatedValue<U>(from fromType: PropertyType) -> U? {
             switch fromType {
+            case .uint32:
+                return (try? translateValue(UInt32(parameter), in: objectID, scope: scope, element: element)) as U?
             case .float32:
-                return (try? value(in: objectID, scope: scope, element: element, for: Float(parameter))) as! U?
+                return (try? translateValue(Float(parameter), in: objectID, scope: scope, element: element)) as U?
+            case .string:
+                return (try? translateValue(parameter as CFString, in: objectID, scope: scope, element: element)) as U?
             default:
                 break
             }
@@ -220,8 +224,20 @@ extension Property {
         switch readSemantics {
         case .translation(let fromType, let toType):
             switch toType {
+            case .uint32:
+                if let value: UInt32 = getTranslatedValue(from: fromType) {
+                    return "\(value)"
+                }
             case .float32:
                 if let value: Float = getTranslatedValue(from: fromType) {
+                    return "\(value)"
+                }
+            case .objectID:
+                if let value: AudioObjectID = getTranslatedValue(from: fromType) {
+                    return "\(value)"
+                }
+            case .string:
+                if let value: CFString = getTranslatedValue(from: fromType) {
                     return "\(value)"
                 }
             default:

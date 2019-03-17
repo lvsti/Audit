@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE06C0F7223464A90022192D /* Qualifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE06C0F6223464A90022192D /* Qualifier.swift */; };
+		BE06C106223EB1650022192D /* ObjectDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE06C105223EB1650022192D /* ObjectDescription.swift */; };
 		BE17934C2217524B0075FCA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17934B2217524B0075FCA2 /* AppDelegate.swift */; };
 		BE17934E2217524C0075FCA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17934D2217524C0075FCA2 /* Assets.xcassets */; };
 		BE1793512217524C0075FCA2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE17934F2217524C0075FCA2 /* MainMenu.xib */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		BE06C0F6223464A90022192D /* Qualifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qualifier.swift; sourceTree = "<group>"; };
+		BE06C105223EB1650022192D /* ObjectDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDescription.swift; sourceTree = "<group>"; };
 		BE1793482217524B0075FCA2 /* Audit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE17934B2217524B0075FCA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE17934D2217524C0075FCA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				BE1793762218182E0075FCA2 /* FourCCDatabase.swift */,
 				BE1793522217524C0075FCA2 /* Info.plist */,
 				BE17934F2217524C0075FCA2 /* MainMenu.xib */,
+				BE06C105223EB1650022192D /* ObjectDescription.swift */,
 				BE17937222176E580075FCA2 /* PropertyDescription.swift */,
 			);
 			path = Audit;
@@ -377,6 +380,7 @@
 				BE179394221824330075FCA2 /* ObjectTreeViewController.swift in Sources */,
 				BE1793782218182E0075FCA2 /* FourCCDatabase.swift in Sources */,
 				BE179385221820310075FCA2 /* ValueCellView.swift in Sources */,
+				BE06C106223EB1650022192D /* ObjectDescription.swift in Sources */,
 				BE1793A92218AD170075FCA2 /* AudioChannelLayout.swift in Sources */,
 				BE179387221820720075FCA2 /* PropertyListDataSource.swift in Sources */,
 				BE17937422176E580075FCA2 /* PropertyDescription.swift in Sources */,

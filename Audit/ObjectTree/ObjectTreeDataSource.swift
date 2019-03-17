@@ -63,11 +63,12 @@ final class ObjectTreeDataSource {
         if let children: [AudioObjectID] = try? ObjectProperty.ownedObjects.arrayValue(in: objectID) {
             for child in children {
                 let subtree = audioChildren(of: child)
-                let name = ObjectProperty.name.description(in: child) ?? "<untitled @\(child)>"
                 let classID: AudioClassID = (try? ObjectProperty.class.value(in: child)) ?? AudioClass.object
+                let className = AudioClass.name(for: classID)
+                let name = ObjectProperty.name.description(in: child) ?? "<\(className) @\(child)>"
                 nodes.append(AudioNode(objectID: child,
                                        classID: classID,
-                                       name: name.isEmpty ? "<untitled @\(child)>" : name,
+                                       name: name.isEmpty ? "<\(className) @\(child)>" : name,
                                        children: subtree))
             }
         }

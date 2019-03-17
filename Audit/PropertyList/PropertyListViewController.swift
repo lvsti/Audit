@@ -105,7 +105,7 @@ final class PropertyListViewController: NSViewController {
 
 extension PropertyListViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return dataSource.sections.count + dataSource.sections.reduce(0) { $0 + $1.1.count }
+        return dataSource.sections.count + dataSource.sections.reduce(0) { $0 + $1.items.count }
     }
 }
 
@@ -122,7 +122,7 @@ extension PropertyListViewController: NSTableViewDelegate {
         if indexPath.item == 0 {
             let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GroupCell"),
                                           owner: nil) as! NSTextField
-            view.stringValue = " " + dataSource.sections[indexPath.section].0
+            view.stringValue = " " + dataSource.sections[indexPath.section].title
             return view
         }
         

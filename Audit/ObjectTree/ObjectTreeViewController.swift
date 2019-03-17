@@ -42,7 +42,15 @@ final class ObjectTreeViewController: NSViewController {
         treeView.reloadData()
         treeView.expandItem(nil, expandChildren: true)
     }
-
+    
+    func selectNode(withObjectID objectID: AudioObjectID) {
+        guard let row = dataSource.rowForFirst(where: { $0.objectID == objectID }) else {
+            NSSound.beep()
+            return
+        }
+        
+        treeView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    }
 }
 
 extension ObjectTreeViewController: NSOutlineViewDelegate {

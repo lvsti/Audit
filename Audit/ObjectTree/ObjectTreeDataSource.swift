@@ -28,15 +28,41 @@ final class ObjectTreeDataSource {
         tree = AudioNode(objectID: AudioObject.system,
                          classID: AudioClass.system,
                          name: "System",
-                         children: AudioChildren(of: AudioObject.system))
+                         children: audioChildren(of: AudioObject.system))
     }
     
-    private func AudioChildren(of objectID: AudioObjectID) -> [AudioNode] {
+    func rowForFirst(where pred: (AudioNode) -> Bool) -> Int? {
+        var row = 0
+        
+        func recursiveFirst(in node: AudioNode, where pred: (AudioNode) -> Bool) -> Bool {
+            if pred(node) {
+                return true
+            }
+            
+            row += 1
+            
+            for child in node.children {
+                if recursiveFirst(in: child, where: pred) {
+                    return true
+                }
+            }
+            
+            return false
+        }
+        
+        if recursiveFirst(in: tree, where: pred) {
+            return row
+        }
+        
+        return nil
+    }
+    
+    private func audioChildren(of objectID: AudioObjectID) -> [AudioNode] {
         var nodes: [AudioNode] = []
         
         if let children: [AudioObjectID] = try? ObjectProperty.ownedObjects.arrayValue(in: objectID) {
             for child in children {
-                let subtree = AudioChildren(of: child)
+                let subtree = audioChildren(of: child)
                 let name = ObjectProperty.name.description(in: child) ?? "<untitled @\(child)>"
                 let classID: AudioClassID = (try? ObjectProperty.class.value(in: child)) ?? AudioClass.object
                 nodes.append(AudioNode(objectID: child,

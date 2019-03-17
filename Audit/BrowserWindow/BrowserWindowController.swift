@@ -31,6 +31,7 @@ final class BrowserWindowController: NSWindowController {
     init() {
         super.init(window: nil)
         objectTreeViewController.delegate = self
+        propertyListViewController.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -139,6 +140,12 @@ extension BrowserWindowController: ObjectTreeViewDelegate {
 
         propertyListViewController.currentScope = currentScope
         propertyListViewController.currentNode = currentNode
+    }
+}
+
+extension BrowserWindowController: PropertyListViewDelegate {
+    func propertyListDidJumpToNode(withObjectID objectID: AudioObjectID) {
+        objectTreeViewController.selectNode(withObjectID: objectID)
     }
 }
 

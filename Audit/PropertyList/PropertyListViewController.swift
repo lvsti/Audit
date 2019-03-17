@@ -11,6 +11,10 @@ import CoreAudio
 import Carbon.HIToolbox
 import HALKit
 
+protocol PropertyListViewDelegate: class {
+    func propertyListDidJumpToNode(withObjectID objectID: AudioObjectID)
+}
+
 final class PropertyListViewController: NSViewController {
     
     @IBOutlet private weak var tableView: NSTableView!
@@ -18,6 +22,8 @@ final class PropertyListViewController: NSViewController {
     private var translationPanelController: TranslationPanelController!
 
     private let dataSource = PropertyListDataSource()
+    
+    weak var delegate: PropertyListViewDelegate?
     
     var currentScope: AudioObjectPropertyScope = AudioObjectProperty.Scope.global {
         didSet {
@@ -67,6 +73,15 @@ final class PropertyListViewController: NSViewController {
         view.window?.makeFirstResponder(qlvc)
     }
     
+    @IBAction private func jumpToObject(_ sender: Any) {
+        if let node = currentNode,
+           tableView.selectedRow != -1,
+           let item = dataSource.itemForRow(tableView.selectedRow),
+           let objectID: AudioObjectID = try? item.property.value(in: node.objectID) {
+            delegate?.propertyListDidJumpToNode(withObjectID: objectID)
+        }
+    }
+    
     @IBAction private func tableRowDoubleClicked(_ sender: Any) {
         guard
             let node = currentNode,
@@ -100,6 +115,22 @@ final class PropertyListViewController: NSViewController {
         if isViewLoaded {
             tableView.reloadData()
         }
+    }
+}
+
+extension PropertyListViewController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(jumpToObject(_:)) {
+            guard
+                tableView.selectedRow != -1,
+                let item = dataSource.itemForRow(tableView.selectedRow),
+                item.property.type == .objectID
+            else {
+                return false
+            }
+        }
+        
+        return true
     }
 }
 

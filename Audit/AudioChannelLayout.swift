@@ -8,7 +8,12 @@
 
 import Foundation
 import CoreAudio
+
+#if canImport(CoreAudioTypes)
+import CoreAudioTypes
+#else
 import CoreAudio.CoreAudioTypes
+#endif
 
 extension AudioChannelLayout: CustomDebugStringConvertible {
     public var debugDescription: String {

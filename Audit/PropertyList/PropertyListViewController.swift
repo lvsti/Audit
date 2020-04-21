@@ -145,6 +145,10 @@ extension PropertyListViewController: NSTableViewDelegate {
         return dataSource.indexPathForRow(row)!.item == 0
     }
     
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        return !self.tableView(tableView, isGroupRow: row)
+    }
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let indexPath = dataSource.indexPathForRow(row) else {
             return nil
